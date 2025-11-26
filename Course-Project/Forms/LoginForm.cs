@@ -3,7 +3,6 @@ using Course_Project.Utils;
 using Course_Project.Database;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using Course_Project.Forms;
 
 namespace Course_Project.Forms
 {
@@ -12,16 +11,6 @@ namespace Course_Project.Forms
         public LoginForm()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -33,12 +22,9 @@ namespace Course_Project.Forms
             {
                 connection.Open();
                 var query = new MySqlCommand(
-                    "SELECT * FROM Users WHERE username=@u AND passwordHash=@p",
+                    $"SELECT * FROM Users WHERE username='{username}' AND passwordHash='{password}'",
                     connection
-                    );
-
-                query.Parameters.AddWithValue("@u", username);
-                query.Parameters.AddWithValue("@p", password);
+                );
 
                 var reader = query.ExecuteReader();
 

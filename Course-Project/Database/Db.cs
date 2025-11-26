@@ -7,8 +7,8 @@ namespace Course_Project.Database
     {
         public static MySqlConnection Connection()
         {
-            string path = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
-            return new MySqlConnection(path);
+            return new MySqlConnection(ConfigurationManager
+                .ConnectionStrings["MyDb"].ConnectionString);
         }
     }
 }

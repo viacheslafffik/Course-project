@@ -1,14 +1,13 @@
 ﻿using System;
-using Course_Project.Forms;
 using System.Windows.Forms;
 
 namespace Course_Project.Forms
 {
     public partial class MainForm : Form
     {
-        private string _username;
-        private string _role;
-        private string _firstName;
+        private readonly string _username;
+        private readonly string _role;
+        private readonly string _firstName;
 
         public MainForm(string username, string role, string firstName)
         {
@@ -20,19 +19,13 @@ namespace Course_Project.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Показуємо привітання
             lblHello.Text = $"Привіт, {_firstName}!";
-
-            // Касир НЕ може керувати користувачами
-            if (_role != "admin")
-            {
-                btnUsers.Enabled = false;
-            }
+            if (_role != "admin") btnUsers.Hide();  
         }
 
         private void btnUsers_Click(object sender, EventArgs e)
         {
-            new Forms.UsersForm().ShowDialog();
+            new UsersForm().ShowDialog();
         }
 
         private void btnProducts_Click(object sender, EventArgs e)

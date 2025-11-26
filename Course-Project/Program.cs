@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using Course_Project.Database;
 using Course_Project.Forms;
+using Course_Project.Models;
 
 namespace Course_Project
 {
@@ -13,17 +13,13 @@ namespace Course_Project
         [STAThread]
         static void Main()
         {
-#if NET6_0_OR_GREATER
-            ApplicationConfiguration.Initialize();
-#else
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-#endif
-            if (!DataInitializer.AdminExists())
+            if (!User.AdminExists())
             {
-                DataInitializer.CreateSystemAdminDefault();
+                User.CreateSystemAdminDefault();
                 MessageBox.Show(
-                    "Створено системного адміністратора!\n\n" +
+                    "Створено системного адміністратора:\n\n" +
                     "Логін: admin\n" +
                     "Пароль: admin123",
                     "Перший запуск",
