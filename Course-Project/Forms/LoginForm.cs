@@ -27,7 +27,6 @@ namespace Course_Project.Forms
                 );
 
                 var reader = query.ExecuteReader();
-
                 if (!reader.Read())
                 {
                     MessageBox.Show("Невірний логін або пароль");
