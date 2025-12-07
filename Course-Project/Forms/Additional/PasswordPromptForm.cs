@@ -19,7 +19,6 @@ namespace Course_Project.Forms.Addictional
                 MessageBox.Show("Пароль не може бути порожнім.");
                 return;
             }
-
             DialogResult = DialogResult.OK;
             Close();
         }

@@ -30,7 +30,7 @@ namespace Course_Project.Forms
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Тут буде форма товарів.");
+            new ProductsForm(_role).ShowDialog();
         }
 
         private void btnSales_Click(object sender, EventArgs e)

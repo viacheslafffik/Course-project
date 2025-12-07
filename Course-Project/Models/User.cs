@@ -26,8 +26,6 @@ namespace Course_Project.Models
             }
         }
 
-        // static methods
-
         public static void Delete(int id)
         {
             using (var connection = Db.Connection())
@@ -61,7 +59,7 @@ namespace Course_Project.Models
             {
                 connection.Open();
                 var query = new MySqlCommand(
-                    "Select userId, firstName, lastName, username, role from Users",
+                    "select userId, firstName, lastName, username, role from Users",
                     connection
                 );
                 var table = new DataTable();
