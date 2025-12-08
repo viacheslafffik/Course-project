@@ -12,40 +12,25 @@ namespace Course_Project.Forms
         private const int pageSize = 10;
         private List<Product.ProductWithNames> allProducts;
         private string currentUserRole;
-        //private string currentUserRole = "admin"; // або seller
 
         public ProductsForm(string role)
         {
             InitializeComponent();
-
             currentUserRole = role;
-
-            if (currentUserRole == "seller")
-            {
-                btnAddCategory.Hide();
-                btnAddProduct.Hide(); // якщо продавцю не можна додавати товар
-            }
-
+            if (currentUserRole == "seller") btnAddCategory.Hide();     
             LoadFilters();
             LoadData();
-
             flpProducts.Resize += (s, e) =>
             {
-                foreach (Control c in flpProducts.Controls)
-                {
-                    c.Width = flpProducts.ClientSize.Width - 40;
-                }
+                foreach (Control c in flpProducts.Controls) c.Width = flpProducts.ClientSize.Width - 40;                
             };
         }
-
-
 
         private void LoadFilters()
         {
             cbFilterCategory.DataSource = Category.GetAll();
             cbFilterCategory.DisplayMember = "name";
             cbFilterCategory.ValueMember = "categoryId";
-
             cbFilterBrand.DataSource = Brand.GetAll();
             cbFilterBrand.DisplayMember = "name";
             cbFilterBrand.ValueMember = "brandId";
@@ -60,33 +45,20 @@ namespace Course_Project.Forms
         private void ApplyFilter()
         {
             List<Product.ProductWithNames> filtered = allProducts;
-
-            // ------ Пошук за назвою ------
             if (!string.IsNullOrWhiteSpace(tbSearch.Text))
             {
                 string search = tbSearch.Text.Trim().ToLower();
                 filtered = filtered.FindAll(p => p.name.ToLower().Contains(search));
             }
-
-            // ------ Фільтр категорії ------
             if (cbFilterCategory.SelectedValue is int catId && catId > 0)
-            {
-                filtered = filtered.FindAll(p => p.categoryId == catId);
-            }
-
-            // ------ Фільтр бренду ------
-            if (cbFilterBrand.SelectedValue is int brandId && brandId > 0)
-            {
-                filtered = filtered.FindAll(p => p.brandId == brandId);
-            }
-
-            // ------ Фільтр ціни ------
+                filtered = filtered.FindAll(p => p.categoryId == catId);           
+            if (cbFilterBrand.SelectedValue is int brandId && brandId > 0) 
+                filtered = filtered.FindAll(p => p.brandId == brandId);       
             if (decimal.TryParse(tbMin.Text, out decimal min))
                 filtered = filtered.FindAll(p => p.price >= min);
-
             if (decimal.TryParse(tbMax.Text, out decimal max))
                 filtered = filtered.FindAll(p => p.price <= max);
-
+            if (chkInStockOnly.Checked) filtered = filtered.FindAll(p => p.quantity > 0);
             ShowPage(filtered);
         }
 
@@ -102,12 +74,8 @@ namespace Course_Project.Forms
             for (int i = start; i < end; i++)
             {
                 var card = new ProductCard(products[i], currentUserRole);
-
-                // адаптивність
                 card.Width = flpProducts.ClientSize.Width - 40;
                 card.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-
-                // відступ між картками
                 card.Margin = new Padding(0, 0, 0, 15);
 
                 flpProducts.Controls.Add(card);
@@ -133,9 +101,7 @@ namespace Course_Project.Forms
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
-            if (page > 1)
-                page--;
-
+            if (page > 1) page--;
             ApplyFilter();
         }
 
@@ -159,6 +125,12 @@ namespace Course_Project.Forms
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            page = 1;
+            ApplyFilter();
+        }
+
+        private void chkInStockOnly_CheckedChanged(object sender, EventArgs e)
         {
             page = 1;
             ApplyFilter();

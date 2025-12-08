@@ -17,7 +17,6 @@ namespace Course_Project.Models
         public static List<Product> GetAll()
         {
             var list = new List<Product>();
-
             using (var connection = Db.Connection())
             {
                 connection.Open();
@@ -108,7 +107,6 @@ namespace Course_Project.Models
             public static List<ProductWithNames> GetAllWithNames()
             {
                 var list = new List<ProductWithNames>();
-
                 using (var connection = Db.Connection())
                 {
                     connection.Open();
@@ -120,7 +118,6 @@ namespace Course_Project.Models
                         LEFT JOIN Category c ON p.categoryId = c.categoryId
                         LEFT JOIN Brand b ON p.brandId = b.brandId", 
                         connection);
-
                     using (var reader = query.ExecuteReader())
                     {
                         while (reader.Read())

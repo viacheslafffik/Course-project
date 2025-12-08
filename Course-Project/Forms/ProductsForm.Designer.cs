@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panelFilters = new System.Windows.Forms.Panel();
+            this.chkInStockOnly = new System.Windows.Forms.CheckBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tbMax = new System.Windows.Forms.TextBox();
             this.tbMin = new System.Windows.Forms.TextBox();
@@ -45,15 +49,13 @@
             this.btnAddProduct = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.tbSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.panelFilters.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelFilters
             // 
+            this.panelFilters.Controls.Add(this.chkInStockOnly);
             this.panelFilters.Controls.Add(this.tbSearch);
             this.panelFilters.Controls.Add(this.lblSearch);
             this.panelFilters.Controls.Add(this.btnSearch);
@@ -69,13 +71,52 @@
             this.panelFilters.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFilters.Location = new System.Drawing.Point(0, 0);
             this.panelFilters.Name = "panelFilters";
-            this.panelFilters.Size = new System.Drawing.Size(800, 93);
+            this.panelFilters.Size = new System.Drawing.Size(899, 93);
             this.panelFilters.TabIndex = 0;
+            // 
+            // chkInStockOnly
+            // 
+            this.chkInStockOnly.AutoSize = true;
+            this.chkInStockOnly.Location = new System.Drawing.Point(578, 26);
+            this.chkInStockOnly.Name = "chkInStockOnly";
+            this.chkInStockOnly.Size = new System.Drawing.Size(110, 17);
+            this.chkInStockOnly.TabIndex = 5;
+            this.chkInStockOnly.Text = "Показати наявні";
+            this.chkInStockOnly.UseVisualStyleBackColor = true;
+            this.chkInStockOnly.CheckedChanged += new System.EventHandler(this.chkInStockOnly_CheckedChanged);
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearch.Location = new System.Drawing.Point(28, 70);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(620, 20);
+            this.tbSearch.TabIndex = 4;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(25, 53);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(40, 13);
+            this.lblSearch.TabIndex = 3;
+            this.lblSearch.Text = "Пошук";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(712, 64);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(175, 23);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.Text = "Знайти";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(584, 23);
+            this.button1.Location = new System.Drawing.Point(712, 23);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(175, 23);
             this.button1.TabIndex = 0;
@@ -85,7 +126,7 @@
             // tbMax
             // 
             this.tbMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMax.Location = new System.Drawing.Point(451, 26);
+            this.tbMax.Location = new System.Drawing.Point(444, 26);
             this.tbMax.Name = "tbMax";
             this.tbMax.Size = new System.Drawing.Size(98, 20);
             this.tbMax.TabIndex = 2;
@@ -93,7 +134,7 @@
             // tbMin
             // 
             this.tbMin.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbMin.Location = new System.Drawing.Point(329, 26);
+            this.tbMin.Location = new System.Drawing.Point(326, 25);
             this.tbMin.Name = "tbMin";
             this.tbMin.Size = new System.Drawing.Size(98, 20);
             this.tbMin.TabIndex = 2;
@@ -118,7 +159,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(448, 9);
+            this.label4.Location = new System.Drawing.Point(441, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 0;
@@ -128,7 +169,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(326, 9);
+            this.label3.Location = new System.Drawing.Point(323, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 0;
@@ -160,7 +201,7 @@
             this.flpProducts.Location = new System.Drawing.Point(0, 93);
             this.flpProducts.Name = "flpProducts";
             this.flpProducts.Padding = new System.Windows.Forms.Padding(20);
-            this.flpProducts.Size = new System.Drawing.Size(800, 357);
+            this.flpProducts.Size = new System.Drawing.Size(899, 357);
             this.flpProducts.TabIndex = 1;
             this.flpProducts.WrapContents = false;
             // 
@@ -174,14 +215,14 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 402);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(800, 48);
+            this.panelBottom.Size = new System.Drawing.Size(899, 48);
             this.panelBottom.TabIndex = 2;
             // 
             // lblPage
             // 
             this.lblPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblPage.AutoSize = true;
-            this.lblPage.Location = new System.Drawing.Point(392, 18);
+            this.lblPage.Location = new System.Drawing.Point(441, 18);
             this.lblPage.Name = "lblPage";
             this.lblPage.Size = new System.Drawing.Size(51, 13);
             this.lblPage.TabIndex = 2;
@@ -190,7 +231,7 @@
             // btnAddCategory
             // 
             this.btnAddCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddCategory.Location = new System.Drawing.Point(479, 13);
+            this.btnAddCategory.Location = new System.Drawing.Point(578, 13);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(172, 23);
             this.btnAddCategory.TabIndex = 1;
@@ -212,7 +253,7 @@
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.Location = new System.Drawing.Point(713, 13);
+            this.btnNext.Location = new System.Drawing.Point(812, 13);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 0;
@@ -231,39 +272,11 @@
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(25, 53);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(40, 13);
-            this.lblSearch.TabIndex = 3;
-            this.lblSearch.Text = "Пошук";
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearch.Location = new System.Drawing.Point(28, 70);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(521, 20);
-            this.tbSearch.TabIndex = 4;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(584, 68);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(175, 23);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "Знайти";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // ProductsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(899, 450);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.flpProducts);
             this.Controls.Add(this.panelFilters);
@@ -299,5 +312,6 @@
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.CheckBox chkInStockOnly;
     }
 }
