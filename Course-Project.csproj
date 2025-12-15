@@ -150,6 +150,7 @@
     <Compile Include="Forms\ProductsForm.Designer.cs">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Pages\ProductsPage.cs">
       <SubType>UserControl</SubType>

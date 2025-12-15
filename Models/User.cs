@@ -55,7 +55,7 @@ namespace Course_Project.Models
 
         public static DataTable GetAllUsers()
         {
-            using ( var connection = Db.Connection())
+            using (var connection = Db.Connection())
             {
                 connection.Open();
                 var query = new MySqlCommand(

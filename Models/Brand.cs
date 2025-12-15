@@ -28,12 +28,10 @@ namespace Course_Project.Models
         public static List<Brand> GetAll()
         {
             var list = new List<Brand>();
-
             using (var connection = Db.Connection())
             {
                 connection.Open();
                 var query = new MySqlCommand("select * from Brand", connection);
-
                 using (var r = query.ExecuteReader())
                 {
                     while (r.Read())
@@ -47,7 +45,6 @@ namespace Course_Project.Models
                     }
                 }
             }
-
             return list;
         }
     }

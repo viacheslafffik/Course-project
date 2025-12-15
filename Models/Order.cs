@@ -8,10 +8,10 @@ namespace Course_Project.Models
     {
         public static void Create(int userId)
         {
-            using (var conn = Db.Connection())
+            using (var connection = Db.Connection())
             {
-                conn.Open();
-                using (var tx = conn.BeginTransaction())
+                connection.Open();
+                using (var tx = connection.BeginTransaction())
                 {
                     try
                     {
@@ -21,10 +21,7 @@ namespace Course_Project.Models
                             "SELECT LAST_INSERT_ID();";
 
                         int orderId;
-                        using (var cmd = new MySqlCommand(sqlOrder, conn, tx))
-                        {
-                            orderId = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
+                        using (var query = new MySqlCommand(sqlOrder, connection, tx)) orderId = Convert.ToInt32(query.ExecuteScalar());                       
 
                         foreach (var i in OrderCart.Items)
                         {
@@ -32,16 +29,16 @@ namespace Course_Project.Models
                                 "INSERT INTO OrderItem (orderId, productId, quantity, price) " +
                                 $"VALUES ({orderId}, {i.productId}, {i.quantity}, {i.price});";
 
-                            using (var cmdItem = new MySqlCommand(sqlItem, conn, tx)) cmdItem.ExecuteNonQuery();
+                            using (var queryItem = new MySqlCommand(sqlItem, connection, tx)) queryItem.ExecuteNonQuery();
 
                             string sqlUpdate =
                                 "UPDATE Product SET quantity = quantity - " + i.quantity +
                                 " WHERE productId = " + i.productId + ";";
 
-                            using (var cmdUpd = new MySqlCommand($@"UPDATE Product SET quantity = quantity - " + i.quantity +
+                            using (var queryUpd = new MySqlCommand($@"UPDATE Product SET quantity = quantity - " + i.quantity +
                                 " WHERE productId = " + i.productId + ";", 
-                                conn, tx))
-                                cmdUpd.ExecuteNonQuery();
+                                connection, tx))
+                                queryUpd.ExecuteNonQuery();
                         }
 
                         tx.Commit();

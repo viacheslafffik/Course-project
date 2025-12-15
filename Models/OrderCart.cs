@@ -21,10 +21,7 @@ namespace Course_Project.Models
             Notify();
         }
 
-        public static decimal Total()
-        {
-            return Items.Sum(i => i.price * i.quantity);
-        }
+        public static decimal Total() => Items.Sum(i => i.price * i.quantity);      
 
         public static void AddOrUpdate(int productId, string name, decimal price, int quantity, int available)
         {
