@@ -114,12 +114,6 @@
     <Compile Include="Forms\Additional\AddProductForm.Designer.cs">
       <DependentUpon>AddProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\EditProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Additional\EditProductForm.Designer.cs">
-      <DependentUpon>EditProductForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Additional\PasswordPromptForm.cs">
       <SubType>Form</SubType>
     </Compile>

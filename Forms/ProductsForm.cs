@@ -11,7 +11,7 @@ namespace Course_Project.Forms
         private int page = 1;
         private const int pageSize = 10;
         private List<Product.ProductWithNames> allProducts;
-        private string currentUserRole;
+        private readonly string currentUserRole;
 
         public ProductsForm(string role)
         {
@@ -50,14 +50,10 @@ namespace Course_Project.Forms
                 string search = tbSearch.Text.Trim().ToLower();
                 filtered = filtered.FindAll(p => p.name.ToLower().Contains(search));
             }
-            if (cbFilterCategory.SelectedValue is int catId && catId > 0)
-                filtered = filtered.FindAll(p => p.categoryId == catId);           
-            if (cbFilterBrand.SelectedValue is int brandId && brandId > 0) 
-                filtered = filtered.FindAll(p => p.brandId == brandId);       
-            if (decimal.TryParse(tbMin.Text, out decimal min))
-                filtered = filtered.FindAll(p => p.price >= min);
-            if (decimal.TryParse(tbMax.Text, out decimal max))
-                filtered = filtered.FindAll(p => p.price <= max);
+            if (cbFilterCategory.SelectedValue is int catId && catId > 0) filtered = filtered.FindAll(p => p.categoryId == catId);           
+            if (cbFilterBrand.SelectedValue is int brandId && brandId > 0) filtered = filtered.FindAll(p => p.brandId == brandId);       
+            if (decimal.TryParse(tbMin.Text, out decimal min)) filtered = filtered.FindAll(p => p.price >= min);
+            if (decimal.TryParse(tbMax.Text, out decimal max)) filtered = filtered.FindAll(p => p.price <= max);
             if (chkInStockOnly.Checked) filtered = filtered.FindAll(p => p.quantity > 0);
             ShowPage(filtered);
         }
@@ -67,10 +63,8 @@ namespace Course_Project.Forms
         {
             flpProducts.SuspendLayout();
             flpProducts.Controls.Clear();
-
             int start = (page - 1) * pageSize;
             int end = Math.Min(start + pageSize, products.Count);
-
             for (int i = start; i < end; i++)
             {
                 var card = new ProductCard(products[i]);
@@ -80,57 +74,54 @@ namespace Course_Project.Forms
 
                 flpProducts.Controls.Add(card);
             }
-
             lblPage.Text = $"Сторінка {page}";
-
             flpProducts.ResumeLayout();
         }
 
 
-        private void btnApplyFilters_Click(object sender, EventArgs e)
+        private void BtnApplyFilters_Click(object sender, EventArgs e)
         {
             page = 1;
             ApplyFilter();
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
+        private void BtnNext_Click(object sender, EventArgs e)
         {
             page++;
             ApplyFilter();
         }
 
-        private void btnPrev_Click(object sender, EventArgs e)
+        private void BtnPrev_Click(object sender, EventArgs e)
         {
             if (page > 1) page--;
             ApplyFilter();
         }
 
-        private void btnAddProduct_Click(object sender, EventArgs e)
+        private void BtnAddProduct_Click(object sender, EventArgs e)
         {
             new AddProductForm().ShowDialog();
             LoadData();
         }
 
-        private void btnAddCategory_Click(object sender, EventArgs e)
+        private void BtnAddCategory_Click(object sender, EventArgs e)
         {
             new AddCategoryForm().ShowDialog();
-            LoadFilters();
-            LoadData();
+            LoadFilters(); LoadData();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             page = 1;
             ApplyFilter();
         }
 
-        private void tbSearch_TextChanged(object sender, EventArgs e)
+        private void TbSearch_TextChanged(object sender, EventArgs e)
         {
             page = 1;
             ApplyFilter();
         }
 
-        private void chkInStockOnly_CheckedChanged(object sender, EventArgs e)
+        private void ChkInStockOnly_CheckedChanged(object sender, EventArgs e)
         {
             page = 1;
             ApplyFilter();

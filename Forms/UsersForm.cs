@@ -17,7 +17,7 @@ namespace Course_Project.Forms
 
         private void LoadUsers() => dgvUsers.DataSource = User.GetAllUsers();
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             // validate methods are needed here
             if (txtFirstname.Text.Length == 0 
@@ -41,7 +41,7 @@ namespace Course_Project.Forms
             MessageBox.Show("Користувача додано.");
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgvUsers.CurrentRow == null)
             {
@@ -54,7 +54,7 @@ namespace Course_Project.Forms
         }
 
 
-        private void btnResetPass_Click(object sender, EventArgs e)
+        private void BtnResetPass_Click(object sender, EventArgs e)
         {
             if (dgvUsers.CurrentRow == null)
             {

@@ -121,7 +121,7 @@
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "Додати";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnDelete
             // 
@@ -131,7 +131,7 @@
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Вилучити";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnResetPass
             // 
@@ -141,7 +141,7 @@
             this.btnResetPass.TabIndex = 11;
             this.btnResetPass.Text = "Скинути пароль";
             this.btnResetPass.UseVisualStyleBackColor = true;
-            this.btnResetPass.Click += new System.EventHandler(this.btnResetPass_Click);
+            this.btnResetPass.Click += new System.EventHandler(this.BtnResetPass_Click);
             // 
             // txtPassword
             // 

@@ -71,7 +71,7 @@
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Зберегти";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnAddAtribute
             // 
@@ -80,7 +80,7 @@
             this.btnAddAtribute.Size = new System.Drawing.Size(188, 23);
             this.btnAddAtribute.TabIndex = 4;
             this.btnAddAtribute.Text = "Додати характеристику";
-            this.btnAddAtribute.Click += new System.EventHandler(this.btnAddAtribute_Click);
+            this.btnAddAtribute.Click += new System.EventHandler(this.BtnAddAtribute_Click);
             // 
             // AddCategoryForm
             // 

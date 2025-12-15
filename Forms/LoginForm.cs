@@ -13,7 +13,7 @@ namespace Course_Project.Forms
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
             string password = PasswordManager.Hash(txtPassword.Text);

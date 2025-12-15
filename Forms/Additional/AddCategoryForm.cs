@@ -12,29 +12,35 @@ namespace Course_Project.Forms.Additional
             InitializeComponent();
         }
 
-        private void btnAddAtribute_Click(object sender, EventArgs e)
+        private void BtnAddAtribute_Click(object sender, EventArgs e)
         {
-            var panel = new Panel();
-            panel.Width = flowAttributes.ClientSize.Width - 25;
-            panel.Height = 32;
-            var txt = new TextBox();
-            txt.Width = panel.Width - 40;
-            txt.Left = 0;
-            txt.Top = 4;
-            txt.Name = "attr_" + Guid.NewGuid().ToString("N");
-            var btnRemove = new Button();
-            btnRemove.Text = "X";
-            btnRemove.Width = 30;
-            btnRemove.Left = txt.Right + 6;
-            btnRemove.Top = 2;
-            btnRemove.Height = txt.Height;
+            var panel = new Panel
+            {
+                Width = flowAttributes.ClientSize.Width - 25,
+                Height = 32
+            };
+            var txt = new TextBox
+            {
+                Width = panel.Width - 40,
+                Left = 0,
+                Top = 4,
+                Name = "attr_" + Guid.NewGuid().ToString("N")
+            };
+            var btnRemove = new Button
+            {
+                Text = "X",
+                Width = 30,
+                Left = txt.Right + 6,
+                Top = 2,
+                Height = txt.Height
+            };
             btnRemove.Click += (s, ev) => flowAttributes.Controls.Remove(panel);
             panel.Controls.Add(txt);
             panel.Controls.Add(btnRemove);
             flowAttributes.Controls.Add(panel);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             string categoryName = txtCatogoryName.Text.Trim();
             if (string.IsNullOrWhiteSpace(categoryName))

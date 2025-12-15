@@ -70,7 +70,7 @@
             this.btnToggle.TabIndex = 12;
             this.btnToggle.Text = "Показати характеристики";
             this.btnToggle.UseVisualStyleBackColor = true;
-            this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
+            this.btnToggle.Click += new System.EventHandler(this.BtnToggle_Click);
             // 
             // lblBrand
             // 
@@ -126,7 +126,7 @@
             this.btnAddToOrder.TabIndex = 12;
             this.btnAddToOrder.Text = "Додати до замовлення";
             this.btnAddToOrder.UseVisualStyleBackColor = true;
-            this.btnAddToOrder.Click += new System.EventHandler(this.btnAddToOrder_Click);
+            this.btnAddToOrder.Click += new System.EventHandler(this.BtnAddToOrder_Click);
             // 
             // ProductCard
             // 

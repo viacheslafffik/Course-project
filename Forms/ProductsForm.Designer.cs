@@ -84,7 +84,7 @@
             this.chkInStockOnly.TabIndex = 5;
             this.chkInStockOnly.Text = "Показати наявні";
             this.chkInStockOnly.UseVisualStyleBackColor = true;
-            this.chkInStockOnly.CheckedChanged += new System.EventHandler(this.chkInStockOnly_CheckedChanged);
+            this.chkInStockOnly.CheckedChanged += new System.EventHandler(this.ChkInStockOnly_CheckedChanged);
             // 
             // tbSearch
             // 
@@ -93,7 +93,7 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(620, 20);
             this.tbSearch.TabIndex = 4;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.TextChanged += new System.EventHandler(this.TbSearch_TextChanged);
             // 
             // lblSearch
             // 
@@ -112,7 +112,7 @@
             this.btnSearch.Size = new System.Drawing.Size(175, 23);
             this.btnSearch.TabIndex = 0;
             this.btnSearch.Text = "Знайти";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // button1
             // 
@@ -122,7 +122,7 @@
             this.button1.Size = new System.Drawing.Size(175, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Застосувати";
-            this.button1.Click += new System.EventHandler(this.btnApplyFilters_Click);
+            this.button1.Click += new System.EventHandler(this.BtnApplyFilters_Click);
             // 
             // tbMax
             // 
@@ -238,7 +238,7 @@
             this.btnAddCategory.TabIndex = 1;
             this.btnAddCategory.Text = "Додати категорію";
             this.btnAddCategory.UseVisualStyleBackColor = true;
-            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            this.btnAddCategory.Click += new System.EventHandler(this.BtnAddCategory_Click);
             // 
             // btnAddProduct
             // 
@@ -249,7 +249,7 @@
             this.btnAddProduct.TabIndex = 1;
             this.btnAddProduct.Text = "Додати товар";
             this.btnAddProduct.UseVisualStyleBackColor = true;
-            this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            this.btnAddProduct.Click += new System.EventHandler(this.BtnAddProduct_Click);
             // 
             // btnNext
             // 
@@ -260,7 +260,7 @@
             this.btnNext.TabIndex = 0;
             this.btnNext.Text = "Вперед";
             this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
             // btnPrev
             // 
@@ -271,7 +271,7 @@
             this.btnPrev.TabIndex = 0;
             this.btnPrev.Text = "Назад";
             this.btnPrev.UseVisualStyleBackColor = true;
-            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+            this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
             // 
             // ProductsForm
             // 

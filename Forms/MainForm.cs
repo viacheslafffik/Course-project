@@ -33,22 +33,22 @@ namespace Course_Project.Forms
             panelContent.Controls.Add(page);
         }
 
-        private void btnUsers_Click(object sender, EventArgs e)
+        private void BtnUsers_Click(object sender, EventArgs e)
         {
             LoadPage(new UsersPage());
         }
 
-        private void btnProducts_Click(object sender, EventArgs e)
+        private void BtnProducts_Click(object sender, EventArgs e)
         {
             LoadPage(new ProductsPage(_role));
         }
 
-        private void btnSales_Click(object sender, EventArgs e)
+        private void BtnSales_Click(object sender, EventArgs e)
         {
             LoadPage(new OrdersPage(_username));
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
             Hide();
             new LoginForm().Show();

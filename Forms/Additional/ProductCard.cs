@@ -49,7 +49,7 @@ namespace Course_Project.Forms.Additional
             }
         }
 
-        private void btnToggle_Click(object sender, EventArgs e)
+        private void BtnToggle_Click(object sender, EventArgs e)
         {
             expanded = !expanded;
             pnlAttributes.Visible = expanded;
@@ -58,7 +58,7 @@ namespace Course_Project.Forms.Additional
                 "Показати характеристики ▼";
         }
 
-        private void btnAddToOrder_Click(object sender, EventArgs e)
+        private void BtnAddToOrder_Click(object sender, EventArgs e)
         {
             if (product.quantity <= 0)
             {
@@ -81,10 +81,5 @@ namespace Course_Project.Forms.Additional
                 MessageBox.Show("Додано у замовлення.");
             }
         }
-//private void btnEdit_Click(object sender, EventArgs e)
-        //{
-        //    //var form = new EditProductForm(product.productId);
-        //    //form.ShowDialog();
-        //}
     }
 }

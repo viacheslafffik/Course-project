@@ -37,7 +37,7 @@ namespace Course_Project.Forms.Additional
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(18, 16);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(161, 21);
+            this.lblTitle.Size = new System.Drawing.Size(173, 21);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Додати у замовлення";
             // 
@@ -46,7 +46,7 @@ namespace Course_Project.Forms.Additional
             this.lblNameCaption.AutoSize = true;
             this.lblNameCaption.Location = new System.Drawing.Point(19, 55);
             this.lblNameCaption.Name = "lblNameCaption";
-            this.lblNameCaption.Size = new System.Drawing.Size(39, 13);
+            this.lblNameCaption.Size = new System.Drawing.Size(41, 13);
             this.lblNameCaption.TabIndex = 1;
             this.lblNameCaption.Text = "Товар:";
             // 
@@ -55,7 +55,7 @@ namespace Course_Project.Forms.Additional
             this.lblPriceCaption.AutoSize = true;
             this.lblPriceCaption.Location = new System.Drawing.Point(19, 79);
             this.lblPriceCaption.Name = "lblPriceCaption";
-            this.lblPriceCaption.Size = new System.Drawing.Size(36, 13);
+            this.lblPriceCaption.Size = new System.Drawing.Size(32, 13);
             this.lblPriceCaption.TabIndex = 2;
             this.lblPriceCaption.Text = "Ціна:";
             // 
@@ -64,7 +64,7 @@ namespace Course_Project.Forms.Additional
             this.lblAvailableCaption.AutoSize = true;
             this.lblAvailableCaption.Location = new System.Drawing.Point(19, 103);
             this.lblAvailableCaption.Name = "lblAvailableCaption";
-            this.lblAvailableCaption.Size = new System.Drawing.Size(56, 13);
+            this.lblAvailableCaption.Size = new System.Drawing.Size(61, 13);
             this.lblAvailableCaption.TabIndex = 3;
             this.lblAvailableCaption.Text = "Наявність:";
             // 
@@ -113,29 +113,29 @@ namespace Course_Project.Forms.Additional
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(197, 176);
+            this.btnAdd.Location = new System.Drawing.Point(22, 176);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(90, 27);
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "Додати";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(292, 176);
+            this.btnCancel.Location = new System.Drawing.Point(132, 176);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(90, 27);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Скасувати";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // AddToOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 221);
+            this.ClientSize = new System.Drawing.Size(242, 221);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.numQuantity);

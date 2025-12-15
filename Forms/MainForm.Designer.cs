@@ -57,7 +57,7 @@ namespace Course_Project.Forms
             this.btnLogout.TabIndex = 4;
             this.btnLogout.Text = "Вийти";
             this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // btnSales
             // 
@@ -72,7 +72,7 @@ namespace Course_Project.Forms
             this.btnSales.TabIndex = 3;
             this.btnSales.Text = "Замовлення";
             this.btnSales.UseVisualStyleBackColor = true;
-            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
+            this.btnSales.Click += new System.EventHandler(this.BtnSales_Click);
             // 
             // btnProducts
             // 
@@ -87,7 +87,7 @@ namespace Course_Project.Forms
             this.btnProducts.TabIndex = 2;
             this.btnProducts.Text = "Товари";
             this.btnProducts.UseVisualStyleBackColor = true;
-            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
+            this.btnProducts.Click += new System.EventHandler(this.BtnProducts_Click);
             // 
             // btnUsers
             // 
@@ -102,7 +102,7 @@ namespace Course_Project.Forms
             this.btnUsers.TabIndex = 1;
             this.btnUsers.Text = "Користувачі";
             this.btnUsers.UseVisualStyleBackColor = true;
-            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
+            this.btnUsers.Click += new System.EventHandler(this.BtnUsers_Click);
             // 
             // panelTop
             // 

@@ -89,7 +89,7 @@ namespace Course_Project.Forms.Additional
             pnlAttributes.Controls.Add(tbValue);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbName.Text))
             {

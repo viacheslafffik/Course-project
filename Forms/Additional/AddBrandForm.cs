@@ -8,7 +8,7 @@ namespace Course_Project.Forms.Additional
     {
         public AddBrandForm() => InitializeComponent();
        
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tbName.Text))
             {
@@ -19,7 +19,7 @@ namespace Course_Project.Forms.Additional
             DialogResult = DialogResult.OK;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e) => Close();
+        private void BtnCancel_Click(object sender, EventArgs e) => Close();
         
     }
 }

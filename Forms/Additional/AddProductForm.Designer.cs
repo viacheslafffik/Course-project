@@ -80,7 +80,7 @@
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Додати товар";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // lblName
             // 

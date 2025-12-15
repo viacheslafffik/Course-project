@@ -24,14 +24,14 @@ namespace Course_Project.Forms.Additional
             numQuantity.Value = 1;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             SelectedQuantity = (int)numQuantity.Value;
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
