@@ -1,5 +1,5 @@
 ﻿using Course_Project.Forms.Additional;
-using Course_Project.Models;
+using Course_Project.Models.Users;
 using Course_Project.Utils;
 using System;
 using System.Windows.Forms;

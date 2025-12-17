@@ -169,7 +169,7 @@ namespace Course_Project.Forms
             this.lblApp.Name = "lblApp";
             this.lblApp.Size = new System.Drawing.Size(188, 21);
             this.lblApp.TabIndex = 0;
-            this.lblApp.Text = "BookSales Manager • 1.2";
+            this.lblApp.Text = "BookSales Manager • 1.3";
             // 
             // panelContent
             // 

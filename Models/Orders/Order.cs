@@ -3,8 +3,9 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Course_Project.Models.Users;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Orders
 {
     internal class Order
     {

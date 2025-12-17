@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Orders
 {
     internal class OrderInfo
     {
@@ -26,37 +26,54 @@ namespace Course_Project.Models
                 connection.Open();
 
                 string sql =
-                @"SELECT o.orderId, o.orderDate,
-                o.totalPrice,
-                o.totalPriceWithDiscount,
-                u.username,
-                c.phone
+                @"SELECT 
+                    o.orderId,
+                    o.orderDate,
+                    o.totalPrice,
+                    o.totalPriceWithDiscount,
+                    u.username AS seller,
+                    c.phone AS clientPhone
                 FROM Orders o
                 JOIN Users u ON o.userId = u.userId
                 LEFT JOIN Clients c ON o.clientId = c.clientId
-                WHERE 1=1 ";
+                WHERE 1 = 1 ";
 
-                if (role != "admin") sql += " AND u.username = '" + sellerUsername + "'";
-                if (!string.IsNullOrWhiteSpace(phone)) sql += " AND c.phone = '" + phone + "'";
+                if (role != "admin")
+                    sql += " AND u.username = @seller";
+
+                if (!string.IsNullOrWhiteSpace(phone))
+                    sql += " AND c.phone LIKE CONCAT('%', @phone, '%')";
+
                 sql += " ORDER BY o.orderDate DESC";
 
-                using (var query = new MySqlCommand(sql, connection))
-                using (var r = query.ExecuteReader())
+                using (var cmd = new MySqlCommand(sql, connection))
                 {
-                    while (r.Read())
+                    if (role != "admin")
+                        cmd.Parameters.AddWithValue("@seller", sellerUsername);
+
+                    if (!string.IsNullOrWhiteSpace(phone))
+                        cmd.Parameters.AddWithValue("@phone", phone);
+
+                    using (var r = cmd.ExecuteReader())
                     {
-                        list.Add(new OrderInfo
+                        while (r.Read())
                         {
-                            orderId = Convert.ToInt32(r["orderId"]),
-                            orderDate = Convert.ToDateTime(r["orderDate"]),
-                            totalPrice = Convert.ToDecimal(r["totalPrice"]),
-                            totalPriceWithDiscount = Convert.ToDecimal(r["totalPriceWithDiscount"]),
-                            seller = r["username"].ToString(),
-                            clientPhone = r["phone"]?.ToString()
-                        });
+                            list.Add(new OrderInfo
+                            {
+                                orderId = Convert.ToInt32(r["orderId"]),
+                                orderDate = Convert.ToDateTime(r["orderDate"]),
+                                totalPrice = Convert.ToDecimal(r["totalPrice"]),
+                                totalPriceWithDiscount = Convert.ToDecimal(r["totalPriceWithDiscount"]),
+                                seller = r["seller"].ToString(),
+                                clientPhone = r["clientPhone"] == DBNull.Value
+                                    ? "-"
+                                    : r["clientPhone"].ToString()
+                            });
+                        }
                     }
                 }
             }
+
             return list;
         }
     }

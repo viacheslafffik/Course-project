@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Course_Project.Forms;
-using Course_Project.Models;
+using Course_Project.Models.Users;
 
 namespace Course_Project
 {

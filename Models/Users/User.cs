@@ -4,7 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Users
 {
     internal class User
     {

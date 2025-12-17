@@ -241,8 +241,13 @@
     <Compile Include="Forms\ProductsForm.Designer.cs">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Books\Author.cs" />
+    <Compile Include="Models\Books\Book.cs" />
+    <Compile Include="Models\Books\BookFilter.cs" />
+    <Compile Include="Models\Books\Language.cs" />
+    <Compile Include="Models\Books\Publisher.cs" />
+    <Compile Include="Models\Books\Series.cs" />
     <Compile Include="Models\Users\Client.cs" />
-    <Compile Include="Models\Core\Offer.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderInfo.cs" />
     <Compile Include="Pages\ClientsPage.cs">
@@ -370,8 +375,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Books\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

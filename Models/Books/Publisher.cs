@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Course_Project.Models.Core
+namespace Course_Project.Models.Books
 {
-    internal class Offer
+    internal class Publisher
     {
     }
 }

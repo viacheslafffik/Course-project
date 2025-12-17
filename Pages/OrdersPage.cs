@@ -1,8 +1,9 @@
 using Course_Project.Forms.Additional;
-using Course_Project.Models;
+using Course_Project.Models.Users;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using Course_Project.Models.Orders;
 
 namespace Course_Project.Pages
 {
@@ -121,10 +122,20 @@ namespace Course_Project.Pages
             var form = new AddClientForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                currentClient = Client.GetByPhone(tbClientPhone.Text.Trim());
-                lblClientInfo.Text = $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
+                currentClient = Client.GetById(form.CreatedClientId);
+
+                if (currentClient == null)
+                {
+                    lblClientInfo.Text = "Клієнт не знайдений";
+                    return;
+                }
+
+                lblClientInfo.Text =
+                    $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
+
                 RefreshTotalWithDiscount();
             }
         }
+
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Orders
 {
     public static class OrderCart
     {
