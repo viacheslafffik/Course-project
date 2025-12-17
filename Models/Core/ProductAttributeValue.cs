@@ -1,7 +1,7 @@
 ﻿using Course_Project.Database;
 using MySql.Data.MySqlClient;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Core
 {
     internal class ProductAttributeValue
     {

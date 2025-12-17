@@ -1,4 +1,4 @@
-﻿using Course_Project.Models;
+﻿using Course_Project.Models.Core;
 using System;
 using System.Windows.Forms;
 

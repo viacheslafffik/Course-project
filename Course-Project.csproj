@@ -241,9 +241,10 @@
     <Compile Include="Forms\ProductsForm.Designer.cs">
       <DependentUpon>ProductsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderInfo.cs" />
+    <Compile Include="Models\Users\Client.cs" />
+    <Compile Include="Models\Core\Offer.cs" />
+    <Compile Include="Models\Orders\Order.cs" />
+    <Compile Include="Models\Orders\OrderInfo.cs" />
     <Compile Include="Pages\ClientsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -280,13 +281,13 @@
     <Compile Include="Forms\UsersForm.Designer.cs">
       <DependentUpon>UsersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Brand.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryAttribute.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductAttributeValue.cs" />
-    <Compile Include="Models\OrderCart.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Core\Brand.cs" />
+    <Compile Include="Models\Core\Category.cs" />
+    <Compile Include="Models\Core\CategoryAttribute.cs" />
+    <Compile Include="Models\Core\Product.cs" />
+    <Compile Include="Models\Core\ProductAttributeValue.cs" />
+    <Compile Include="Models\Orders\OrderCart.cs" />
+    <Compile Include="Models\Users\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\MacStyle.cs" />
@@ -369,6 +370,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Books\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

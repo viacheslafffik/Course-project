@@ -1,4 +1,5 @@
-﻿using Course_Project.Models;
+﻿using Course_Project.Models.Core;
+using Course_Project.Models;
 using System;
 using System.Linq;
 using System.Windows.Forms;

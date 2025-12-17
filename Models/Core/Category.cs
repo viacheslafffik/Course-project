@@ -3,12 +3,13 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Core
 {
     internal class Category
     {
         public int categoryId { get; set; }
         public string name { get; set; }
+        public string productType { get; set; }
 
         public static List<Category> GetAll()
         {

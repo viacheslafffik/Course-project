@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Core
 {
     public class Product
     {
@@ -12,7 +12,7 @@ namespace Course_Project.Models
         public decimal price { get; set; }
         public int quantity { get; set; }
         public int categoryId { get; set; }
-        public int brandId { get; set; }
+        public int? brandId { get; set; }
 
         public static List<Product> GetAll()
         {

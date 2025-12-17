@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
-namespace Course_Project.Models
+namespace Course_Project.Models.Core
 {
     internal class Brand
     {
