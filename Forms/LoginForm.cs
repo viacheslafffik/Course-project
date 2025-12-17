@@ -11,6 +11,7 @@ namespace Course_Project.Forms
         public LoginForm()
         {
             InitializeComponent();
+            MacStyle.Apply(this);
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
