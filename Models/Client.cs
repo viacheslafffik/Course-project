@@ -12,16 +12,54 @@ namespace Course_Project.Models
         public string lastName { get; set; }
         public string phone { get; set; }
         public int discount { get; set; }
-
-        public static List<Client> GetAll()
+        public static int Add(string firstName, string lastName, string phone)
         {
-            var list = new List<Client>();
+            using (var conn = Db.Connection())
+            {
+                conn.Open();
 
+                string escFirst = MySqlHelper.EscapeString(firstName);
+                string escLast = MySqlHelper.EscapeString(lastName);
+                string escPhone = MySqlHelper.EscapeString(phone);
+
+                string sql =
+                    "INSERT INTO Clients (firstName, lastName, phone, discount) " +
+                    $"VALUES ('{escFirst}', '{escLast}', '{escPhone}', 0);" +
+                    "SELECT LAST_INSERT_ID();";
+
+                using (var query = new MySqlCommand(sql, conn)) return Convert.ToInt32(query.ExecuteScalar());
+                
+            }
+        }
+
+        public static Client GetByPhone(string phone)
+        {
             using (var connection = Db.Connection())
             {
                 connection.Open();
-                var query = new MySqlCommand("SELECT * FROM Clients", connection);
-
+                string escPhone = MySqlHelper.EscapeString(phone);
+                using (var query = new MySqlCommand( $"SELECT * FROM Clients WHERE phone = '{escPhone}'", connection))
+                using (var r = query.ExecuteReader())
+                {
+                    if (!r.Read()) return null;
+                    return new Client
+                    {
+                        clientId = Convert.ToInt32(r["clientId"]),
+                        firstName = r["firstName"].ToString(),
+                        lastName = r["lastName"].ToString(),
+                        phone = r["phone"].ToString(),
+                        discount = Convert.ToInt32(r["discount"])
+                    };
+                }
+            }
+        }
+        public static List<Client> GetAll()
+        {
+            var list = new List<Client>();
+            using (var connection = Db.Connection())
+            {
+                connection.Open();
+                using (var query = new MySqlCommand("SELECT * FROM Clients", connection))
                 using (var r = query.ExecuteReader())
                 {
                     while (r.Read())
@@ -38,21 +76,6 @@ namespace Course_Project.Models
                 }
             }
             return list;
-        }
-
-        public static int Add(string firstName, string lastName, string phone, int discount)
-        {
-            using (var connection = Db.Connection())
-            {
-                connection.Open();
-                var query = new MySqlCommand(
-                    $"INSERT INTO Clients (firstName, lastName, phone, discount) " +
-                    $"VALUES ('{firstName}', '{lastName}', '{phone}', {discount}); " +
-                    $"SELECT LAST_INSERT_ID();",
-                    connection);
-
-                return Convert.ToInt32(query.ExecuteScalar());
-            }
         }
     }
 }

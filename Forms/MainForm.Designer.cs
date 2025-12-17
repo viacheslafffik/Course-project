@@ -18,6 +18,8 @@ namespace Course_Project.Forms
         private void InitializeComponent()
         {
             this.panelSidebar = new System.Windows.Forms.Panel();
+            this.BtnOrders = new System.Windows.Forms.Button();
+            this.BtnClients = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
             this.btnProducts = new System.Windows.Forms.Button();
@@ -33,6 +35,8 @@ namespace Course_Project.Forms
             // panelSidebar
             // 
             this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(26)))));
+            this.panelSidebar.Controls.Add(this.BtnOrders);
+            this.panelSidebar.Controls.Add(this.BtnClients);
             this.panelSidebar.Controls.Add(this.btnLogout);
             this.panelSidebar.Controls.Add(this.btnSales);
             this.panelSidebar.Controls.Add(this.btnProducts);
@@ -43,6 +47,36 @@ namespace Course_Project.Forms
             this.panelSidebar.Padding = new System.Windows.Forms.Padding(14, 60, 14, 14);
             this.panelSidebar.Size = new System.Drawing.Size(210, 600);
             this.panelSidebar.TabIndex = 0;
+            // 
+            // BtnOrders
+            // 
+            this.BtnOrders.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnOrders.FlatAppearance.BorderSize = 0;
+            this.BtnOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnOrders.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnOrders.ForeColor = System.Drawing.Color.White;
+            this.BtnOrders.Location = new System.Drawing.Point(14, 232);
+            this.BtnOrders.Name = "BtnOrders";
+            this.BtnOrders.Size = new System.Drawing.Size(182, 43);
+            this.BtnOrders.TabIndex = 6;
+            this.BtnOrders.Text = "Замовлення";
+            this.BtnOrders.UseVisualStyleBackColor = true;
+            this.BtnOrders.Click += new System.EventHandler(this.BtnOrders_Click);
+            // 
+            // BtnClients
+            // 
+            this.BtnClients.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnClients.FlatAppearance.BorderSize = 0;
+            this.BtnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnClients.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnClients.ForeColor = System.Drawing.Color.White;
+            this.BtnClients.Location = new System.Drawing.Point(14, 189);
+            this.BtnClients.Name = "BtnClients";
+            this.BtnClients.Size = new System.Drawing.Size(182, 43);
+            this.BtnClients.TabIndex = 5;
+            this.BtnClients.Text = "Клієнти";
+            this.BtnClients.UseVisualStyleBackColor = true;
+            this.BtnClients.Click += new System.EventHandler(this.BtnClients_Click);
             // 
             // btnLogout
             // 
@@ -70,7 +104,7 @@ namespace Course_Project.Forms
             this.btnSales.Name = "btnSales";
             this.btnSales.Size = new System.Drawing.Size(182, 43);
             this.btnSales.TabIndex = 3;
-            this.btnSales.Text = "Замовлення";
+            this.btnSales.Text = "Оформити продаж";
             this.btnSales.UseVisualStyleBackColor = true;
             this.btnSales.Click += new System.EventHandler(this.BtnSales_Click);
             // 
@@ -133,9 +167,9 @@ namespace Course_Project.Forms
             this.lblApp.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblApp.Location = new System.Drawing.Point(18, 20);
             this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(185, 21);
+            this.lblApp.Size = new System.Drawing.Size(188, 21);
             this.lblApp.TabIndex = 0;
-            this.lblApp.Text = "BookSales Manager • 1.1";
+            this.lblApp.Text = "BookSales Manager • 1.2";
             // 
             // panelContent
             // 
@@ -178,5 +212,7 @@ namespace Course_Project.Forms
         private System.Windows.Forms.Button btnProducts;
         private System.Windows.Forms.Button btnSales;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button BtnClients;
+        private System.Windows.Forms.Button BtnOrders;
     }
 }

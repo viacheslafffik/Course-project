@@ -22,7 +22,6 @@ namespace Course_Project.Forms
         {
             lblHello.Text = $"Привіт, {_firstName}!";
             if (_role != "admin") btnUsers.Hide();
-
             LoadPage(new ProductsPage(_role));
         }
 
@@ -52,6 +51,16 @@ namespace Course_Project.Forms
         {
             Hide();
             new LoginForm().Show();
+        }
+
+        private void BtnClients_Click(object sender, EventArgs e)
+        {
+            LoadPage(new ClientsPage());
+        }
+
+        private void BtnOrders_Click(object sender, EventArgs e)
+        {
+            LoadPage(new OrdersHistoryPage(_username, _role));
         }
     }
 }

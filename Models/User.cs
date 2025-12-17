@@ -102,8 +102,8 @@ namespace Course_Project.Models
         {
             var admin = new User
             {
-                firstName = "System",
-                lastName = "Admin",
+                firstName = "Admin",
+                lastName = "User",
                 username = "admin",
                 passwordHash = PasswordManager.Hash("admin123"),
                 role = "admin"

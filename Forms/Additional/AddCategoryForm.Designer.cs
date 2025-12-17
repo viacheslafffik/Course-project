@@ -93,7 +93,7 @@
             this.Controls.Add(this.txtCatogoryName);
             this.Controls.Add(this.label1);
             this.Name = "AddCategoryForm";
-            this.Text = "AddCategoryForm";
+            this.Text = "Додати категорію";
             this.ResumeLayout(false);
             this.PerformLayout();
 

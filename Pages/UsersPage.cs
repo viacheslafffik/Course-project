@@ -15,9 +15,19 @@ namespace Course_Project.Pages
             LoadUsers();
         }
 
-        private void LoadUsers() => dgvUsers.DataSource = User.GetAllUsers();
+        private void LoadUsers()
+        {
+            dgvUsers.AutoGenerateColumns = true;
+            dgvUsers.DataSource = User.GetAllUsers();
+            dgvUsers.Columns["userId"].HeaderText = "ID";
+            dgvUsers.Columns["firstName"].HeaderText = "Імʼя";
+            dgvUsers.Columns["lastName"].HeaderText = "Прізвище";
+            dgvUsers.Columns["username"].HeaderText = "Логін";
+            dgvUsers.Columns["role"].HeaderText = "Роль";
+        }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             // validate methods are needed here
             if (txtFirstname.Text.Length == 0 
@@ -41,7 +51,7 @@ namespace Course_Project.Pages
             MessageBox.Show("Користувача додано.");
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (dgvUsers.CurrentRow == null)
             {
@@ -54,16 +64,14 @@ namespace Course_Project.Pages
         }
 
 
-        private void btnResetPass_Click(object sender, EventArgs e)
+        private void BtnResetPass_Click(object sender, EventArgs e)
         {
             if (dgvUsers.CurrentRow == null)
             {
                 MessageBox.Show("Виберіть користувача!");
                 return;
             }
-
             int id = Convert.ToInt32(dgvUsers.CurrentRow.Cells["userId"].Value);
-
             using (var prompt = new PasswordPromptForm())
             {
                 if (prompt.ShowDialog() == DialogResult.OK)

@@ -15,11 +15,9 @@ namespace Course_Project.Forms.Additional
             currentUserRole = role;
             LoadData();
             cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
-            if (!string.Equals(currentUserRole, "admin", StringComparison.OrdinalIgnoreCase))
-            {
-                if (Controls.ContainsKey("btnEditCategoryAttributes"))
-                    Controls["btnEditCategoryAttributes"].Visible = false;
-            }
+            if (!string.Equals(currentUserRole, "admin", StringComparison.OrdinalIgnoreCase)) 
+                if (Controls.ContainsKey("btnEditCategoryAttributes")) Controls["btnEditCategoryAttributes"].Visible = false;
+            
         }
 
         private void LoadData()
@@ -37,8 +35,7 @@ namespace Course_Project.Forms.Additional
         private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbCategory.SelectedValue == null) return;
-            int categoryId;
-            if (!int.TryParse(cbCategory.SelectedValue.ToString(), out categoryId)) return;
+            if (!int.TryParse(cbCategory.SelectedValue.ToString(), out int categoryId)) return;
             LoadAttributesForCategory(categoryId);
         }
 
@@ -49,24 +46,30 @@ namespace Course_Project.Forms.Additional
             int y = 10;
             foreach (var t in templates)
             {
-                var lbl = new Label();
-                lbl.Text = t.name + ":";
-                lbl.Location = new System.Drawing.Point(8, y + 4);
-                lbl.Width = 120;
+                var lbl = new Label
+                {
+                    Text = t.name + ":",
+                    Location = new System.Drawing.Point(8, y + 4),
+                    Width = 120
+                };
                 pnlAttributes.Controls.Add(lbl);
-                var tb = new TextBox();
-                tb.Name = "attr_" + t.name.Replace(" ", "_");
-                tb.Tag = t.attributeId;
-                tb.Location = new System.Drawing.Point(140, y);
-                tb.Width = 120;
+                var tb = new TextBox
+                {
+                    Name = "attr_" + t.name.Replace(" ", "_"),
+                    Tag = t.attributeId,
+                    Location = new System.Drawing.Point(140, y),
+                    Width = 120
+                };
                 pnlAttributes.Controls.Add(tb);
                 y += 32;
             }
-            var btnManual = new Button();
-            btnManual.Name = "btnAddManualAttr";
-            btnManual.Text = "Додати атрибут вручну";
-            btnManual.AutoSize = true;
-            btnManual.Location = new System.Drawing.Point(8, y + 8);
+            var btnManual = new Button
+            {
+                Name = "btnAddManualAttr",
+                Text = "Додати атрибут вручну",
+                AutoSize = true,
+                Location = new System.Drawing.Point(8, y + 8)
+            };
             btnManual.Click += BtnManual_Click;
             pnlAttributes.Controls.Add(btnManual);
         }
@@ -74,18 +77,22 @@ namespace Course_Project.Forms.Additional
         private void BtnManual_Click(object sender, EventArgs e)
         {
             int y = 10;
-            foreach (Control c in pnlAttributes.Controls) y = Math.Max(y, c.Bottom + 6);         
-            var tbName = new TextBox();
-            tbName.Name = "manual_name_" + Guid.NewGuid().ToString("N");
+            foreach (Control c in pnlAttributes.Controls) y = Math.Max(y, c.Bottom + 6);
+            var tbName = new TextBox
+            {
+                Name = "manual_name_" + Guid.NewGuid().ToString("N"),
+                Location = new System.Drawing.Point(8, y),
+                Width = 140
+            };
             tbName.PlaceholderTextSafe("Назва");
-            tbName.Location = new System.Drawing.Point(8, y);
-            tbName.Width = 140;
             pnlAttributes.Controls.Add(tbName);
-            var tbValue = new TextBox();
-            tbValue.Name = "manual_value_" + Guid.NewGuid().ToString("N");
+            var tbValue = new TextBox
+            {
+                Name = "manual_value_" + Guid.NewGuid().ToString("N"),
+                Location = new System.Drawing.Point(160, y),
+                Width = 140
+            };
             tbValue.PlaceholderTextSafe("Значення");
-            tbValue.Location = new System.Drawing.Point(160, y);
-            tbValue.Width = 140;
             pnlAttributes.Controls.Add(tbValue);
         }
 

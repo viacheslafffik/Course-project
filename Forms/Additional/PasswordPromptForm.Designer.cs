@@ -57,7 +57,7 @@
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "Ок";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // PasswordPromptForm
             // 

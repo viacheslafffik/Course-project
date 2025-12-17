@@ -87,7 +87,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblUser);
             this.Name = "LoginForm";
-            this.Text = "Login Form";
+            this.Text = "Вхід";
             this.ResumeLayout(false);
             this.PerformLayout();
 

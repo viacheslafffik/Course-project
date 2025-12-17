@@ -1,3 +1,4 @@
+using Course_Project.Forms.Additional;
 using Course_Project.Models;
 using System;
 using System.Data;
@@ -8,6 +9,7 @@ namespace Course_Project.Pages
     public partial class OrdersPage : UserControl
     {
         private readonly string username;
+        private Client currentClient;
 
         public OrdersPage(string username)
         {
@@ -20,6 +22,13 @@ namespace Course_Project.Pages
             RefreshCart();
         }
 
+        private void RefreshTotalWithDiscount()
+        {
+            decimal total = OrderCart.Total();
+            if (currentClient != null && currentClient.discount > 0) total -= total * currentClient.discount / 100m;            
+            lblTotal.Text = $"Разом: {total:0.00} грн";
+        }
+
         private void RefreshCart()
         {
             if (InvokeRequired)
@@ -29,14 +38,11 @@ namespace Course_Project.Pages
             }
 
             var table = new DataTable();
-
             table.Columns.Add("productId", typeof(int));
-
             table.Columns.Add("Назва товару", typeof(string));
             table.Columns.Add("Ціна, грн", typeof(decimal));
             table.Columns.Add("Кількість", typeof(int));
             table.Columns.Add("Сума, грн", typeof(decimal));
-
             foreach (var i in OrderCart.Items)
             {
                 table.Rows.Add(
@@ -47,10 +53,9 @@ namespace Course_Project.Pages
                     i.price * i.quantity
                 );
             }
-
             dgvCart.DataSource = table;
             dgvCart.Columns["productId"].Visible = false;
-            lblTotal.Text = "Разом: " + OrderCart.Total().ToString("0.00") + " грн";
+            RefreshTotalWithDiscount();
         }
 
 
@@ -77,14 +82,48 @@ namespace Course_Project.Pages
             try
             {
                 int userId = User.GetIdByUsername(username);
-                Order.Create(userId);
+
+                int orderId = Order.Create(userId, currentClient);
+
+                Utils.ReceiptGenerator.GenerateAndOpen(orderId, currentClient);
 
                 MessageBox.Show("Замовлення оформлено!");
+
                 OrderCart.Clear();
+                currentClient = null;
+                lblClientInfo.Text = "Клієнт не вибраний";
+                RefreshTotalWithDiscount();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Не вдалося зберегти замовлення.\n" + ex.Message);
+            }
+        }
+
+
+        private void BtnFindClient_Click(object sender, EventArgs e)
+        {
+            currentClient = Client.GetByPhone(tbClientPhone.Text.Trim());
+
+            if (currentClient == null)
+            {
+                lblClientInfo.Text = "Клієнта не знайдено";
+            }
+            else
+            {
+                lblClientInfo.Text = $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
+                RefreshTotalWithDiscount();
+            }
+        }
+
+        private void BtnAddClient_Click(object sender, EventArgs e)
+        {
+            var form = new AddClientForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                currentClient = Client.GetByPhone(tbClientPhone.Text.Trim());
+                lblClientInfo.Text = $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
+                RefreshTotalWithDiscount();
             }
         }
     }

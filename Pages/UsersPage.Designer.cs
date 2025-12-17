@@ -40,7 +40,11 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnResetPass = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUsers
@@ -49,17 +53,19 @@
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsers.Location = new System.Drawing.Point(2, 2);
+            this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsers.Location = new System.Drawing.Point(0, 0);
+            this.dgvUsers.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsers.Size = new System.Drawing.Size(532, 448);
+            this.dgvUsers.Size = new System.Drawing.Size(549, 450);
             this.dgvUsers.TabIndex = 0;
             // 
             // lblFN
             // 
             this.lblFN.AutoSize = true;
-            this.lblFN.Location = new System.Drawing.Point(571, 13);
+            this.lblFN.Location = new System.Drawing.Point(53, 14);
             this.lblFN.Name = "lblFN";
             this.lblFN.Size = new System.Drawing.Size(26, 13);
             this.lblFN.TabIndex = 1;
@@ -67,15 +73,15 @@
             // 
             // txtFirstname
             // 
-            this.txtFirstname.Location = new System.Drawing.Point(574, 29);
+            this.txtFirstname.Location = new System.Drawing.Point(46, 40);
             this.txtFirstname.Name = "txtFirstname";
-            this.txtFirstname.Size = new System.Drawing.Size(124, 20);
+            this.txtFirstname.Size = new System.Drawing.Size(121, 20);
             this.txtFirstname.TabIndex = 2;
             // 
             // lblLN
             // 
             this.lblLN.AutoSize = true;
-            this.lblLN.Location = new System.Drawing.Point(571, 65);
+            this.lblLN.Location = new System.Drawing.Point(50, 75);
             this.lblLN.Name = "lblLN";
             this.lblLN.Size = new System.Drawing.Size(56, 13);
             this.lblLN.TabIndex = 3;
@@ -83,15 +89,15 @@
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(574, 91);
+            this.txtLastName.Location = new System.Drawing.Point(46, 101);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(124, 20);
+            this.txtLastName.Size = new System.Drawing.Size(121, 20);
             this.txtLastName.TabIndex = 4;
             // 
             // lblU
             // 
             this.lblU.AutoSize = true;
-            this.lblU.Location = new System.Drawing.Point(571, 125);
+            this.lblU.Location = new System.Drawing.Point(53, 138);
             this.lblU.Name = "lblU";
             this.lblU.Size = new System.Drawing.Size(34, 13);
             this.lblU.TabIndex = 5;
@@ -99,15 +105,15 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(574, 153);
+            this.txtUsername.Location = new System.Drawing.Point(46, 166);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(124, 20);
+            this.txtUsername.Size = new System.Drawing.Size(121, 20);
             this.txtUsername.TabIndex = 6;
             // 
             // lblR
             // 
             this.lblR.AutoSize = true;
-            this.lblR.Location = new System.Drawing.Point(574, 192);
+            this.lblR.Location = new System.Drawing.Point(53, 189);
             this.lblR.Name = "lblR";
             this.lblR.Size = new System.Drawing.Size(45, 13);
             this.lblR.TabIndex = 7;
@@ -115,63 +121,83 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(577, 282);
+            this.btnAdd.Location = new System.Drawing.Point(46, 255);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(97, 23);
+            this.btnAdd.Size = new System.Drawing.Size(121, 23);
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "Додати";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(577, 324);
+            this.btnDelete.Location = new System.Drawing.Point(46, 297);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(97, 23);
+            this.btnDelete.Size = new System.Drawing.Size(121, 23);
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Вилучити";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnResetPass
             // 
-            this.btnResetPass.Location = new System.Drawing.Point(577, 365);
+            this.btnResetPass.Location = new System.Drawing.Point(46, 338);
             this.btnResetPass.Name = "btnResetPass";
-            this.btnResetPass.Size = new System.Drawing.Size(97, 23);
+            this.btnResetPass.Size = new System.Drawing.Size(121, 23);
             this.btnResetPass.TabIndex = 11;
             this.btnResetPass.Text = "Скинути пароль";
             this.btnResetPass.UseVisualStyleBackColor = true;
-            this.btnResetPass.Click += new System.EventHandler(this.btnResetPass_Click);
+            this.btnResetPass.Click += new System.EventHandler(this.BtnResetPass_Click);
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(574, 225);
+            this.txtPassword.Location = new System.Drawing.Point(46, 217);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(124, 20);
+            this.txtPassword.Size = new System.Drawing.Size(121, 20);
             this.txtPassword.TabIndex = 12;
             // 
-            // UsersForm
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.txtLastName);
+            this.panel1.Controls.Add(this.txtPassword);
+            this.panel1.Controls.Add(this.lblFN);
+            this.panel1.Controls.Add(this.btnResetPass);
+            this.panel1.Controls.Add(this.txtFirstname);
+            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.lblLN);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.lblU);
+            this.panel1.Controls.Add(this.lblR);
+            this.panel1.Controls.Add(this.txtUsername);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(549, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.panel1.Size = new System.Drawing.Size(233, 450);
+            this.panel1.TabIndex = 13;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgvUsers);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(549, 450);
+            this.panel2.TabIndex = 14;
+            // 
+            // UsersPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.btnResetPass);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.lblR);
-            this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.lblU);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.lblLN);
-            this.Controls.Add(this.txtFirstname);
-            this.Controls.Add(this.lblFN);
-            this.Controls.Add(this.dgvUsers);
-            this.Name = "UsersForm";
-            this.Text = "UsersForm";
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Name = "UsersPage";
+            this.Size = new System.Drawing.Size(782, 450);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -189,5 +215,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnResetPass;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

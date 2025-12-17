@@ -67,11 +67,12 @@ namespace Course_Project.Forms
             int end = Math.Min(start + pageSize, products.Count);
             for (int i = start; i < end; i++)
             {
-                var card = new ProductCard(products[i]);
-                card.Width = flpProducts.ClientSize.Width - 40;
-                card.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-                card.Margin = new Padding(0, 0, 0, 15);
-
+                var card = new ProductCard(products[i])
+                {
+                    Width = flpProducts.ClientSize.Width - 40,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top,
+                    Margin = new Padding(0, 0, 0, 15)
+                };
                 flpProducts.Controls.Add(card);
             }
             lblPage.Text = $"Сторінка {page}";

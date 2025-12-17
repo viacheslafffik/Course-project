@@ -20,7 +20,11 @@ namespace Course_Project.Pages
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.lblClientInfo = new System.Windows.Forms.Label();
+            this.btnAddClient = new System.Windows.Forms.Button();
+            this.tbClientPhone = new System.Windows.Forms.TextBox();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.btnFindClient = new System.Windows.Forms.Button();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -45,37 +49,77 @@ namespace Course_Project.Pages
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(18, 14);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(89, 21);
+            this.lblTitle.Size = new System.Drawing.Size(103, 21);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Замовлення";
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.lblClientInfo);
+            this.panelBottom.Controls.Add(this.btnAddClient);
+            this.panelBottom.Controls.Add(this.tbClientPhone);
             this.panelBottom.Controls.Add(this.lblTotal);
+            this.panelBottom.Controls.Add(this.btnFindClient);
             this.panelBottom.Controls.Add(this.btnCheckout);
             this.panelBottom.Controls.Add(this.btnClear);
             this.panelBottom.Controls.Add(this.btnRemove);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 402);
+            this.panelBottom.Location = new System.Drawing.Point(0, 374);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(900, 48);
+            this.panelBottom.Size = new System.Drawing.Size(900, 76);
             this.panelBottom.TabIndex = 1;
+            // 
+            // lblClientInfo
+            // 
+            this.lblClientInfo.AutoSize = true;
+            this.lblClientInfo.Location = new System.Drawing.Point(191, 18);
+            this.lblClientInfo.Name = "lblClientInfo";
+            this.lblClientInfo.Size = new System.Drawing.Size(52, 13);
+            this.lblClientInfo.TabIndex = 7;
+            this.lblClientInfo.Text = "Телефон";
+            // 
+            // btnAddClient
+            // 
+            this.btnAddClient.Location = new System.Drawing.Point(429, 39);
+            this.btnAddClient.Name = "btnAddClient";
+            this.btnAddClient.Size = new System.Drawing.Size(108, 27);
+            this.btnAddClient.TabIndex = 6;
+            this.btnAddClient.Text = "Додати";
+            this.btnAddClient.UseVisualStyleBackColor = true;
+            this.btnAddClient.Click += new System.EventHandler(this.BtnAddClient_Click);
+            // 
+            // tbClientPhone
+            // 
+            this.tbClientPhone.Location = new System.Drawing.Point(194, 43);
+            this.tbClientPhone.Name = "tbClientPhone";
+            this.tbClientPhone.Size = new System.Drawing.Size(115, 20);
+            this.tbClientPhone.TabIndex = 4;
             // 
             // lblTotal
             // 
             this.lblTotal.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.Location = new System.Drawing.Point(18, 15);
+            this.lblTotal.Location = new System.Drawing.Point(18, 29);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(55, 19);
             this.lblTotal.TabIndex = 3;
             this.lblTotal.Text = "Разом: ";
             // 
+            // btnFindClient
+            // 
+            this.btnFindClient.Location = new System.Drawing.Point(315, 39);
+            this.btnFindClient.Name = "btnFindClient";
+            this.btnFindClient.Size = new System.Drawing.Size(108, 27);
+            this.btnFindClient.TabIndex = 5;
+            this.btnFindClient.Text = "Знайти";
+            this.btnFindClient.UseVisualStyleBackColor = true;
+            this.btnFindClient.Click += new System.EventHandler(this.BtnFindClient_Click);
+            // 
             // btnCheckout
             // 
             this.btnCheckout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckout.Location = new System.Drawing.Point(779, 11);
+            this.btnCheckout.Location = new System.Drawing.Point(779, 39);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(108, 27);
             this.btnCheckout.TabIndex = 2;
@@ -86,7 +130,7 @@ namespace Course_Project.Pages
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(661, 11);
+            this.btnClear.Location = new System.Drawing.Point(661, 39);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(108, 27);
             this.btnClear.TabIndex = 1;
@@ -97,7 +141,7 @@ namespace Course_Project.Pages
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(543, 11);
+            this.btnRemove.Location = new System.Drawing.Point(543, 39);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(108, 27);
             this.btnRemove.TabIndex = 0;
@@ -116,7 +160,7 @@ namespace Course_Project.Pages
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.ReadOnly = true;
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCart.Size = new System.Drawing.Size(900, 352);
+            this.dgvCart.Size = new System.Drawing.Size(900, 324);
             this.dgvCart.TabIndex = 2;
             // 
             // OrdersPage
@@ -146,5 +190,9 @@ namespace Course_Project.Pages
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.DataGridView dgvCart;
+        private System.Windows.Forms.Button btnAddClient;
+        private System.Windows.Forms.Button btnFindClient;
+        private System.Windows.Forms.TextBox tbClientPhone;
+        private System.Windows.Forms.Label lblClientInfo;
     }
 }
