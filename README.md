@@ -29,7 +29,8 @@ Course-project/
 |- Pages/       
 |- Utils/   
 |- Properties/  
-|- Program.cs  
+============================================================
+|- Program.cs
 |- Course-Project.csproj
 |- Course-Project.sln
 |- packages.config
