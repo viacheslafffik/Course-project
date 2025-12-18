@@ -29,6 +29,7 @@ namespace Course_Project.Forms
             this.lblApp = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
             this.BtnSupply = new System.Windows.Forms.Button();
+            this.BtnBestsellers = new System.Windows.Forms.Button();
             this.panelSidebar.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
@@ -36,6 +37,7 @@ namespace Course_Project.Forms
             // panelSidebar
             // 
             this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(26)))));
+            this.panelSidebar.Controls.Add(this.BtnBestsellers);
             this.panelSidebar.Controls.Add(this.BtnSupply);
             this.panelSidebar.Controls.Add(this.BtnOrders);
             this.panelSidebar.Controls.Add(this.BtnClients);
@@ -198,6 +200,21 @@ namespace Course_Project.Forms
             this.BtnSupply.UseVisualStyleBackColor = true;
             this.BtnSupply.Click += new System.EventHandler(this.BtnSupply_Click);
             // 
+            // BtnBestsellers
+            // 
+            this.BtnBestsellers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBestsellers.FlatAppearance.BorderSize = 0;
+            this.BtnBestsellers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBestsellers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnBestsellers.ForeColor = System.Drawing.Color.White;
+            this.BtnBestsellers.Location = new System.Drawing.Point(14, 318);
+            this.BtnBestsellers.Name = "BtnBestsellers";
+            this.BtnBestsellers.Size = new System.Drawing.Size(182, 43);
+            this.BtnBestsellers.TabIndex = 8;
+            this.BtnBestsellers.Text = "Бестселлери";
+            this.BtnBestsellers.UseVisualStyleBackColor = true;
+            this.BtnBestsellers.Click += new System.EventHandler(this.BtnBestsellers_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -232,5 +249,6 @@ namespace Course_Project.Forms
         private System.Windows.Forms.Button BtnClients;
         private System.Windows.Forms.Button BtnOrders;
         private System.Windows.Forms.Button BtnSupply;
+        private System.Windows.Forms.Button BtnBestsellers;
     }
 }

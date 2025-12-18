@@ -68,5 +68,10 @@ namespace Course_Project.Forms
         {
             LoadPage(new SuppliesPage());
         }
+
+        private void BtnBestsellers_Click(object sender, EventArgs e)
+        {
+            LoadPage(new BestsellersPage());
+        }
     }
 }

@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Db.cs" />
+    <Compile Include="Data\Products\BestsellersRepository.cs" />
     <Compile Include="Data\Products\CategoryRepository.cs" />
     <Compile Include="Data\Products\FiltersRepository.cs" />
     <Compile Include="Data\Products\ProductsRepository.cs" />
@@ -251,6 +252,12 @@
     <Compile Include="Models\Users\Client.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderInfo.cs" />
+    <Compile Include="Pages\BestsellerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\BestsellerPage.Designer.cs">
+      <DependentUpon>BestsellerPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ClientsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -349,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Supplies\SupplyBookForm.resx">
       <DependentUpon>SupplyBookForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\BestsellerPage.resx">
+      <DependentUpon>BestsellerPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\ClientsPage.resx">
       <DependentUpon>ClientsPage.cs</DependentUpon>

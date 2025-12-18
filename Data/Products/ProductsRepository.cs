@@ -227,7 +227,7 @@ namespace Course_Project.Data.Products
                 if (!(kv.Value is List<string> list) || list.Count == 0) continue;
                 if (!int.TryParse(kv.Key.Substring(5), out int aid)) continue;
 
-                sb.Append(@" AND EXISTS ( SELECT 1 FROM ProductAttributeValue pav ю
+                sb.Append(@" AND EXISTS ( SELECT 1 FROM ProductAttributeValue pav
                              WHERE pav.productId = p.productId
                              AND pav.attributeId = " + aid + " AND pav.value IN (");
                 for (int i = 0; i < list.Count; i++)
