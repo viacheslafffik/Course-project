@@ -324,6 +324,7 @@
     <Compile Include="Utils\MacStyle.cs" />
     <Compile Include="Utils\PasswordManager.cs" />
     <Compile Include="Utils\ReceiptGenerator.cs" />
+    <Compile Include="Utils\Session.cs" />
     <EmbeddedResource Include="Forms\Additional\AddBrandForm.resx">
       <DependentUpon>AddBrandForm.cs</DependentUpon>
     </EmbeddedResource>

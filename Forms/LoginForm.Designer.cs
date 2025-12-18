@@ -91,7 +91,7 @@
             this.lblApp.Name = "lblApp";
             this.lblApp.Size = new System.Drawing.Size(177, 21);
             this.lblApp.TabIndex = 5;
-            this.lblApp.Text = "Readium Manager • 1.3";
+            this.lblApp.Text = "Readium Manager • 1.4";
             // 
             // LoginForm
             // 

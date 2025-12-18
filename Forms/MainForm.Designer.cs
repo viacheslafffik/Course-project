@@ -18,6 +18,8 @@ namespace Course_Project.Forms
         private void InitializeComponent()
         {
             this.panelSidebar = new System.Windows.Forms.Panel();
+            this.BtnBestsellers = new System.Windows.Forms.Button();
+            this.BtnSupply = new System.Windows.Forms.Button();
             this.BtnOrders = new System.Windows.Forms.Button();
             this.BtnClients = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -28,8 +30,6 @@ namespace Course_Project.Forms
             this.lblHello = new System.Windows.Forms.Label();
             this.lblApp = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.BtnSupply = new System.Windows.Forms.Button();
-            this.BtnBestsellers = new System.Windows.Forms.Button();
             this.panelSidebar.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +51,36 @@ namespace Course_Project.Forms
             this.panelSidebar.Padding = new System.Windows.Forms.Padding(14, 60, 14, 14);
             this.panelSidebar.Size = new System.Drawing.Size(210, 600);
             this.panelSidebar.TabIndex = 0;
+            // 
+            // BtnBestsellers
+            // 
+            this.BtnBestsellers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnBestsellers.FlatAppearance.BorderSize = 0;
+            this.BtnBestsellers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBestsellers.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnBestsellers.ForeColor = System.Drawing.Color.White;
+            this.BtnBestsellers.Location = new System.Drawing.Point(14, 318);
+            this.BtnBestsellers.Name = "BtnBestsellers";
+            this.BtnBestsellers.Size = new System.Drawing.Size(182, 43);
+            this.BtnBestsellers.TabIndex = 8;
+            this.BtnBestsellers.Text = "Бестселлери";
+            this.BtnBestsellers.UseVisualStyleBackColor = true;
+            this.BtnBestsellers.Click += new System.EventHandler(this.BtnBestsellers_Click);
+            // 
+            // BtnSupply
+            // 
+            this.BtnSupply.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnSupply.FlatAppearance.BorderSize = 0;
+            this.BtnSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSupply.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnSupply.ForeColor = System.Drawing.Color.White;
+            this.BtnSupply.Location = new System.Drawing.Point(14, 275);
+            this.BtnSupply.Name = "BtnSupply";
+            this.BtnSupply.Size = new System.Drawing.Size(182, 43);
+            this.BtnSupply.TabIndex = 7;
+            this.BtnSupply.Text = "Поставки";
+            this.BtnSupply.UseVisualStyleBackColor = true;
+            this.BtnSupply.Click += new System.EventHandler(this.BtnSupply_Click);
             // 
             // BtnOrders
             // 
@@ -173,7 +203,7 @@ namespace Course_Project.Forms
             this.lblApp.Name = "lblApp";
             this.lblApp.Size = new System.Drawing.Size(177, 21);
             this.lblApp.TabIndex = 0;
-            this.lblApp.Text = "Readium Manager • 1.3";
+            this.lblApp.Text = "Readium Manager • 1.4";
             // 
             // panelContent
             // 
@@ -184,36 +214,6 @@ namespace Course_Project.Forms
             this.panelContent.Padding = new System.Windows.Forms.Padding(16);
             this.panelContent.Size = new System.Drawing.Size(990, 536);
             this.panelContent.TabIndex = 2;
-            // 
-            // BtnSupply
-            // 
-            this.BtnSupply.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnSupply.FlatAppearance.BorderSize = 0;
-            this.BtnSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSupply.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.BtnSupply.ForeColor = System.Drawing.Color.White;
-            this.BtnSupply.Location = new System.Drawing.Point(14, 275);
-            this.BtnSupply.Name = "BtnSupply";
-            this.BtnSupply.Size = new System.Drawing.Size(182, 43);
-            this.BtnSupply.TabIndex = 7;
-            this.BtnSupply.Text = "Поставки";
-            this.BtnSupply.UseVisualStyleBackColor = true;
-            this.BtnSupply.Click += new System.EventHandler(this.BtnSupply_Click);
-            // 
-            // BtnBestsellers
-            // 
-            this.BtnBestsellers.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BtnBestsellers.FlatAppearance.BorderSize = 0;
-            this.BtnBestsellers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBestsellers.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.BtnBestsellers.ForeColor = System.Drawing.Color.White;
-            this.BtnBestsellers.Location = new System.Drawing.Point(14, 318);
-            this.BtnBestsellers.Name = "BtnBestsellers";
-            this.BtnBestsellers.Size = new System.Drawing.Size(182, 43);
-            this.BtnBestsellers.TabIndex = 8;
-            this.BtnBestsellers.Text = "Бестселлери";
-            this.BtnBestsellers.UseVisualStyleBackColor = true;
-            this.BtnBestsellers.Click += new System.EventHandler(this.BtnBestsellers_Click);
             // 
             // MainForm
             // 

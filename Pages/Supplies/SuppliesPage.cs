@@ -2,6 +2,7 @@
 using Course_Project.Forms.Additional;
 using Course_Project.Forms.Supplies;
 using Course_Project.Models.Supplies;
+using Course_Project.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -14,22 +15,26 @@ namespace Course_Project.Pages.Supplies
         private readonly SuppliesRepository suppliesRepo = new SuppliesRepository();
 
         private int currentSupplyId = 0;
-        private int currentUserId = 1;
+        private int currentUserId => Session.UserId;
         private bool _uiReady = false;
 
         public SuppliesPage()
         {
             InitializeComponent();
+
             Dock = DockStyle.Fill;
             pnlFilters.Dock = DockStyle.Top;
             pnlContent.Dock = DockStyle.Fill;
             dgvSupplies.Dock = DockStyle.Fill;
             pnlRight.Dock = DockStyle.Right;
             pnlRight.Width = 520;
+
             btnApply.Dock = DockStyle.Top;
             btnAddBook.Dock = DockStyle.Top;
             btnAddExisting.Dock = DockStyle.Top;
+
             dgvItems.Dock = DockStyle.Fill;
+
             btnCreateSupply.Click += BtnCreateSupply_Click;
             btnAddExisting.Click += BtnAddExisting_Click;
             btnAddBook.Click += BtnAddBook_Click;
@@ -37,38 +42,6 @@ namespace Course_Project.Pages.Supplies
             btnResetFilters.Click += BtnResetFilters_Click;
 
             dgvSupplies.SelectionChanged += DgvSupplies_SelectionChanged;
-
-            tbInvoiceSearch.TextChanged += (_, __) =>
-            {
-                if (_uiReady) LoadSupplies();
-            };
-
-            cbSupplierFilter.SelectedIndexChanged += (_, __) =>
-            {
-                if (_uiReady) LoadSupplies();
-            };
-
-            cbFrom.CheckedChanged += (_, __) =>
-            {
-                dtFrom.Enabled = cbFrom.Checked;
-                if (_uiReady) LoadSupplies();
-            };
-
-            cbTo.CheckedChanged += (_, __) =>
-            {
-                dtTo.Enabled = cbTo.Checked;
-                if (_uiReady) LoadSupplies();
-            };
-
-            dtFrom.ValueChanged += (_, __) =>
-            {
-                if (_uiReady && cbFrom.Checked) LoadSupplies();
-            };
-
-            dtTo.ValueChanged += (_, __) =>
-            {
-                if (_uiReady && cbTo.Checked) LoadSupplies();
-            };
 
             LoadSuppliers();
 
@@ -86,12 +59,6 @@ namespace Course_Project.Pages.Supplies
             LoadSupplies();
         }
 
-
-        public void SetCurrentUser(int userId)
-        {
-            currentUserId = userId;
-        }
-
         private void LockItems(bool locked)
         {
             dgvItems.Enabled = !locked;
@@ -103,9 +70,11 @@ namespace Course_Project.Pages.Supplies
         private void LoadSuppliers()
         {
             var list = supplierRepo.GetAll();
+
             cbSupplier.DisplayMember = "name";
             cbSupplier.ValueMember = "supplierId";
             cbSupplier.DataSource = list;
+
             cbSupplierFilter.DisplayMember = "name";
             cbSupplierFilter.ValueMember = "supplierId";
             cbSupplierFilter.DataSource = new List<SupplierModel>(list);
@@ -116,26 +85,49 @@ namespace Course_Project.Pages.Supplies
         {
             int? supplierId = cbSupplierFilter.SelectedValue as int?;
 
-            DateTime? from = cbFrom.Checked ? dtFrom.Value.Date : (DateTime?)null;
-            DateTime? to = cbTo.Checked
-                ? dtTo.Value.Date.AddDays(1).AddSeconds(-1)
+            DateTime? from = cbFrom.Checked 
+                ? dtFrom.Value.Date 
                 : (DateTime?)null;
+            DateTime? to = cbTo.Checked 
+                ? (DateTime?)dtTo.Value.Date.AddDays(1).AddSeconds(-1) 
+                : (DateTime?)null;
+
 
             string invoice = tbInvoiceSearch.Text.Trim();
 
-            dgvSupplies.DataSource = suppliesRepo.GetSupplies(invoice, supplierId, from, to);
+            int? userFilter = Session.IsAdmin 
+                ? (int?)null 
+                : (int?)Session.UserId;
+
+
+            dgvSupplies.DataSource =
+                suppliesRepo.GetSupplies(invoice, supplierId, from, to, userFilter);
 
             if (dgvSupplies.Columns.Count == 0) return;
 
             dgvSupplies.Columns["supplierId"].Visible = false;
             dgvSupplies.Columns["userId"].Visible = false;
-            dgvSupplies.Columns["note"].Visible = false; 
+            dgvSupplies.Columns["note"].Visible = false;
 
-            dgvSupplies.Columns["supplierName"].HeaderText = "Постачальник";
-            dgvSupplies.Columns["invoiceNumber"].HeaderText = "Накладна";
-            dgvSupplies.Columns["supplyDate"].HeaderText = "Дата";
-            dgvSupplies.Columns["totalCost"].HeaderText = "Сума";
-            dgvSupplies.Columns["userName"].HeaderText = "Користувач";
+            if (!Session.IsAdmin)
+                dgvSupplies.Columns["userName"].Visible = false;
+        }
+
+        private void DgvSupplies_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvSupplies.CurrentRow?.DataBoundItem is SupplyModel s)
+            {
+                if (!Session.IsAdmin && s.userId != Session.UserId)
+                {
+                    LockItems(true);
+                    currentSupplyId = 0;
+                    return;
+                }
+
+                currentSupplyId = s.supplyId;
+                LockItems(false);
+                LoadItems();
+            }
         }
 
         private void LoadItems()
@@ -147,22 +139,11 @@ namespace Course_Project.Pages.Supplies
             }
 
             dgvItems.DataSource = suppliesRepo.GetItems(currentSupplyId);
-
-            if (dgvItems.Columns.Count == 0) return;
-            dgvItems.Columns["supplyId"].Visible = false;
-            dgvItems.Columns["itemId"].Visible = false;
-            dgvItems.Columns["supplyId"].HeaderText = "ID";
-            dgvItems.Columns["productId"].HeaderText = "ID";
-            dgvItems.Columns["productName"].HeaderText = "Товар";
-            dgvItems.Columns["quantity"].HeaderText = "К-сть у накладній";
-            dgvItems.Columns["salePrice"].HeaderText = "Ціна продажу";
-            if (dgvItems.Columns.Contains("purchasePrice")) dgvItems.Columns["purchasePrice"].Visible = false;
-            if (dgvItems.Columns.Contains("currentStock")) dgvItems.Columns["currentStock"].Visible = false;
         }
 
         private string GenerateInvoiceNumber()
         {
-            return "INV-" + DateTime.Now.ToString("yyyyMMdd-HHmmss");
+            return "INV-" + DateTime.Now.ToString("yyyyMMdd-HHmmss-fff");
         }
 
         private void BtnCreateSupply_Click(object sender, EventArgs e)
@@ -173,12 +154,10 @@ namespace Course_Project.Pages.Supplies
                 return;
             }
 
-            string invoice = GenerateInvoiceNumber();
-
             currentSupplyId = suppliesRepo.CreateSupply(
                 supplierId,
                 currentUserId,
-                invoice,
+                GenerateInvoiceNumber(),
                 DateTime.Now,
                 ""
             );
@@ -188,16 +167,6 @@ namespace Course_Project.Pages.Supplies
             LoadItems();
         }
 
-        private void DgvSupplies_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvSupplies.CurrentRow?.DataBoundItem is SupplyModel s)
-            {
-                currentSupplyId = s.supplyId;
-                LockItems(false);
-                LoadItems();
-            }
-        }
-
         private void BtnAddExisting_Click(object sender, EventArgs e)
         {
             if (currentSupplyId <= 0) return;
@@ -205,11 +174,9 @@ namespace Course_Project.Pages.Supplies
             using (var f = new AddProductForm())
             {
                 if (f.ShowDialog() != DialogResult.OK) return;
+                if (f.CreatedProductId <= 0) return;
 
-                int productId = f.CreatedProductId;
-                if (productId <= 0) return;
-
-                suppliesRepo.AddItem(currentSupplyId, productId, 1, 0);
+                suppliesRepo.AddItem(currentSupplyId, f.CreatedProductId, 1, 0);
                 LoadItems();
             }
         }
@@ -243,7 +210,6 @@ namespace Course_Project.Pages.Supplies
         {
             tbInvoiceSearch.Clear();
             cbSupplierFilter.SelectedIndex = -1;
-
             cbFrom.Checked = false;
             cbTo.Checked = false;
             dtFrom.Enabled = false;
@@ -251,7 +217,5 @@ namespace Course_Project.Pages.Supplies
 
             LoadSupplies();
         }
-
-       
     }
 }

@@ -31,13 +31,11 @@ namespace Course_Project.Data.Products
                       p.price,
                       SUM(oi.quantity) AS soldQty,
                       SUM(oi.quantity * oi.price) AS revenue
-                  FROM OrderItem oi
-                  JOIN Orders o ON o.orderId = oi.orderId
+                  FROM Orders o
+                  JOIN OrderItem oi ON oi.orderId = o.orderId
                   JOIN Product p ON p.productId = oi.productId
                   JOIN Book b ON b.productId = p.productId
-                  JOIN Category c ON c.categoryId = p.categoryId
-                  WHERE c.productType = 'book'
-                    AND o.orderDate >= NOW() - INTERVAL 7 DAY
+                  WHERE o.orderDate >= DATE_SUB(NOW(), INTERVAL 7 DAY)
                   GROUP BY p.productId, p.name, p.price
                   ORDER BY soldQty DESC, revenue DESC
                   LIMIT 25;";

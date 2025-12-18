@@ -1,29 +1,26 @@
 using Course_Project.Pages;
-using System;
-using System.Windows.Forms;
 using Course_Project.Pages.Products;
 using Course_Project.Pages.Supplies;
+using Course_Project.Utils;
+using System;
+using System.Windows.Forms;
 
 namespace Course_Project.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly string _username;
-        private readonly string _role;
-        private readonly string _firstName;
-
-        public MainForm(string username, string role, string firstName)
+        public MainForm()
         {
             InitializeComponent();
-            _username = username;
-            _role = role;
-            _firstName = firstName;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            lblHello.Text = $"Привіт, {_firstName}!";
-            if (_role != "admin") btnUsers.Hide();
+            lblHello.Text = $"Привіт, {Session.FirstName}!";
+
+            if (!Session.IsAdmin)
+                btnUsers.Hide();
+
             LoadPage(new ProductsPage3());
         }
 
@@ -46,12 +43,7 @@ namespace Course_Project.Forms
 
         private void BtnSales_Click(object sender, EventArgs e)
         {
-            LoadPage(new OrdersPage(_username));
-        }
-
-        private void BtnLogout_Click(object sender, EventArgs e)
-        {
-            Hide(); new LoginForm().Show();
+            LoadPage(new OrdersPage());
         }
 
         private void BtnClients_Click(object sender, EventArgs e)
@@ -61,7 +53,7 @@ namespace Course_Project.Forms
 
         private void BtnOrders_Click(object sender, EventArgs e)
         {
-            LoadPage(new OrdersHistoryPage(_username, _role));
+            LoadPage(new OrdersHistoryPage());
         }
 
         private void BtnSupply_Click(object sender, EventArgs e)
@@ -72,6 +64,13 @@ namespace Course_Project.Forms
         private void BtnBestsellers_Click(object sender, EventArgs e)
         {
             LoadPage(new BestsellersPage());
+        }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Hide();
+            new LoginForm().Show();
         }
     }
 }

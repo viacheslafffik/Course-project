@@ -14,10 +14,14 @@ namespace Course_Project.Data.Supplies
             {
                 connection.Open();
                 note = string.IsNullOrWhiteSpace(note) ? "NULL" : $"'{note.Replace("'", "''")}'";
-                var sql = $"INSERT INTO Supply (supplierId, userId, invoiceNumber, supplyDate, note) " +
+
+                var sql =
+                    $"INSERT INTO Supply (supplierId, userId, invoiceNumber, supplyDate, note) " +
                     $"VALUES ({supplierId}, {userId}, '{invoiceNumber}', '{date:yyyy-MM-dd HH:mm:ss}', {note}); " +
                     $"SELECT LAST_INSERT_ID();";
-                using (var query = new MySqlCommand(sql, connection)) return Convert.ToInt32(query.ExecuteScalar());
+
+                using (var query = new MySqlCommand(sql, connection))
+                    return Convert.ToInt32(query.ExecuteScalar());
             }
         }
 
@@ -26,15 +30,25 @@ namespace Course_Project.Data.Supplies
             using (var connection = Db.Connection())
             {
                 connection.Open();
-                var sql = $"INSERT INTO SupplyItem (supplyId, productId, quantity, purchasePrice) " +
+                var sql =
+                    $"INSERT INTO SupplyItem (supplyId, productId, quantity, purchasePrice) " +
                     $"VALUES ({supplyId}, {productId}, {qty}, {purchasePrice})";
-                using (var query = new MySqlCommand(sql, connection)) query.ExecuteNonQuery();
+
+                using (var query = new MySqlCommand(sql, connection))
+                    query.ExecuteNonQuery();
             }
         }
 
-        public List<SupplyModel> GetSupplies(string invoiceLike, int? supplierId, DateTime? from, DateTime? to)
+        public List<SupplyModel> GetSupplies(
+            string invoiceLike,
+            int? supplierId,
+            DateTime? from,
+            DateTime? to,
+            int? userId
+        )
         {
             var list = new List<SupplyModel>();
+
             using (var connection = Db.Connection())
             {
                 connection.Open();
@@ -47,10 +61,20 @@ namespace Course_Project.Data.Supplies
                       JOIN Users u ON u.userId = s.userId
                       WHERE 1=1";
 
-                if (!string.IsNullOrWhiteSpace(invoiceLike)) sql += $" AND s.invoiceNumber LIKE '%{invoiceLike}%'";
-                if (supplierId.HasValue) sql += $" AND s.supplierId = {supplierId.Value}";
-                if (from.HasValue) sql += $" AND s.supplyDate >= '{from.Value:yyyy-MM-dd HH:mm:ss}'";
-                if (to.HasValue) sql += $" AND s.supplyDate <= '{to.Value:yyyy-MM-dd HH:mm:ss}'";
+                if (!string.IsNullOrWhiteSpace(invoiceLike))
+                    sql += $" AND s.invoiceNumber LIKE '%{invoiceLike}%'";
+
+                if (supplierId.HasValue)
+                    sql += $" AND s.supplierId = {supplierId.Value}";
+
+                if (from.HasValue)
+                    sql += $" AND s.supplyDate >= '{from.Value:yyyy-MM-dd HH:mm:ss}'";
+
+                if (to.HasValue)
+                    sql += $" AND s.supplyDate <= '{to.Value:yyyy-MM-dd HH:mm:ss}'";
+
+                if (userId.HasValue)
+                    sql += $" AND s.userId = {userId.Value}";
 
                 sql += " ORDER BY s.supplyDate DESC";
 
@@ -91,8 +115,7 @@ namespace Course_Project.Data.Supplies
                              p.name AS productName, p.price AS salePrice, p.quantity AS currentStock
                       FROM SupplyItem si
                       JOIN Product p ON p.productId = si.productId
-                      WHERE si.supplyId = " + supplyId + @"
-                      ORDER BY si.itemId DESC";
+                      WHERE si.supplyId = " + supplyId;
 
                 using (var query = new MySqlCommand(sql, connection))
                 using (var r = query.ExecuteReader())
@@ -113,6 +136,7 @@ namespace Course_Project.Data.Supplies
                     }
                 }
             }
+
             return list;
         }
 
@@ -124,37 +148,37 @@ namespace Course_Project.Data.Supplies
                 using (var tr = connection.BeginTransaction())
                 {
                     decimal total = 0;
-                    var readSql = $"SELECT productId, quantity, purchasePrice FROM SupplyItem WHERE supplyId={supplyId}";
+
+                    var readSql =
+                        $"SELECT productId, quantity, purchasePrice FROM SupplyItem WHERE supplyId={supplyId}";
+
                     using (var query = new MySqlCommand(readSql, connection, tr))
                     using (var r = query.ExecuteReader())
                     {
                         var items = new List<(int pid, int qty, decimal pp)>();
-                        while (r.Read()) items.Add((r.GetInt32(0), r.GetInt32(1), r.GetDecimal(2)));
+
+                        while (r.Read())
+                            items.Add((r.GetInt32(0), r.GetInt32(1), r.GetDecimal(2)));
+
                         r.Close();
 
                         foreach (var it in items)
                         {
-                            var updSql = $"UPDATE Product SET quantity = quantity + {it.qty} WHERE productId={it.pid}";
-                            using (var uq = new MySqlCommand(updSql, connection, tr)) uq.ExecuteNonQuery();
+                            var updSql =
+                                $"UPDATE Product SET quantity = quantity + {it.qty} WHERE productId={it.pid}";
+                            using (var uq = new MySqlCommand(updSql, connection, tr))
+                                uq.ExecuteNonQuery();
+
                             total += it.pp * it.qty;
                         }
                     }
 
                     var totalSql = $"UPDATE Supply SET totalCost={total} WHERE supplyId={supplyId}";
-                    using (var tq = new MySqlCommand(totalSql, connection, tr)) tq.ExecuteNonQuery();
+                    using (var tq = new MySqlCommand(totalSql, connection, tr))
+                        tq.ExecuteNonQuery();
 
                     tr.Commit();
                 }
-            }
-        }
-
-        public bool InvoiceExists(string invoiceNumber)
-        {
-            using (var connection = Db.Connection())
-            {
-                connection.Open();
-                var sql = $"SELECT COUNT(*) FROM Supply WHERE invoiceNumber='{invoiceNumber}'";
-                using (var query = new MySqlCommand(sql, connection)) return Convert.ToInt32(query.ExecuteScalar()) > 0;
             }
         }
     }

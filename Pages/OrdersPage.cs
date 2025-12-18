@@ -1,21 +1,23 @@
 using Course_Project.Forms.Additional;
 using Course_Project.Models.Users;
+using Course_Project.Models.Orders;
+using Course_Project.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
-using Course_Project.Models.Orders;
 
 namespace Course_Project.Pages
 {
     public partial class OrdersPage : UserControl
     {
-        private readonly string username;
+        private readonly int userId;
         private Client currentClient;
 
-        public OrdersPage(string username)
+        public OrdersPage()
         {
             InitializeComponent();
-            this.username = username;
+
+            userId = Session.UserId;
 
             dgvCart.AutoGenerateColumns = true;
             OrderCart.Changed += RefreshCart;
@@ -26,7 +28,10 @@ namespace Course_Project.Pages
         private void RefreshTotalWithDiscount()
         {
             decimal total = OrderCart.Total();
-            if (currentClient != null && currentClient.discount > 0) total -= total * currentClient.discount / 100m;            
+
+            if (currentClient != null && currentClient.discount > 0)
+                total -= total * currentClient.discount / 100m;
+
             lblTotal.Text = $"Разом: {total:0.00} грн";
         }
 
@@ -44,6 +49,7 @@ namespace Course_Project.Pages
             table.Columns.Add("Ціна, грн", typeof(decimal));
             table.Columns.Add("Кількість", typeof(int));
             table.Columns.Add("Сума, грн", typeof(decimal));
+
             foreach (var i in OrderCart.Items)
             {
                 table.Rows.Add(
@@ -54,15 +60,17 @@ namespace Course_Project.Pages
                     i.price * i.quantity
                 );
             }
+
             dgvCart.DataSource = table;
             dgvCart.Columns["productId"].Visible = false;
+
             RefreshTotalWithDiscount();
         }
-
 
         private void BtnRemove_Click(object sender, EventArgs e)
         {
             if (dgvCart.CurrentRow == null) return;
+
             int id = Convert.ToInt32(dgvCart.CurrentRow.Cells["productId"].Value);
             OrderCart.Remove(id);
         }
@@ -82,11 +90,9 @@ namespace Course_Project.Pages
 
             try
             {
-                int userId = User.GetIdByUsername(username);
-
                 int orderId = Order.Create(userId, currentClient);
 
-                Utils.ReceiptGenerator.GenerateAndOpen(orderId, currentClient);
+                ReceiptGenerator.GenerateAndOpen(orderId, currentClient);
 
                 MessageBox.Show("Замовлення оформлено!");
 
@@ -101,7 +107,6 @@ namespace Course_Project.Pages
             }
         }
 
-
         private void BtnFindClient_Click(object sender, EventArgs e)
         {
             currentClient = Client.GetByPhone(tbClientPhone.Text.Trim());
@@ -112,16 +117,18 @@ namespace Course_Project.Pages
             }
             else
             {
-                lblClientInfo.Text = $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
+                lblClientInfo.Text =
+                    $"{currentClient.firstName} {currentClient.lastName}, знижка {currentClient.discount}%";
                 RefreshTotalWithDiscount();
             }
         }
 
         private void BtnAddClient_Click(object sender, EventArgs e)
         {
-            var form = new AddClientForm();
-            if (form.ShowDialog() == DialogResult.OK)
+            using (var form = new AddClientForm())
             {
+                if (form.ShowDialog() != DialogResult.OK) return;
+
                 currentClient = Client.GetById(form.CreatedClientId);
 
                 if (currentClient == null)
@@ -136,6 +143,5 @@ namespace Course_Project.Pages
                 RefreshTotalWithDiscount();
             }
         }
-
     }
 }

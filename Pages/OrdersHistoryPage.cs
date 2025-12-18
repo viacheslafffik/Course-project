@@ -1,5 +1,6 @@
 ﻿using Course_Project.Models.Orders;
 using Course_Project.Forms.Additional;
+using Course_Project.Utils;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -11,9 +12,20 @@ namespace Course_Project.Pages
         private readonly string username;
         private readonly string role;
 
+        public OrdersHistoryPage()
+        {
+            InitializeComponent();
+
+            username = Session.Username;
+            role = Session.Role;
+
+            LoadOrders();
+        }
+
         public OrdersHistoryPage(string username, string role)
         {
             InitializeComponent();
+
             this.username = username;
             this.role = role;
 
@@ -45,7 +57,9 @@ namespace Course_Project.Pages
             }
 
             dgvOrders.DataSource = table;
-            dgvOrders.Columns["orderId"].Visible = false;
+
+            if (dgvOrders.Columns.Contains("orderId"))
+                dgvOrders.Columns["orderId"].Visible = false;
         }
 
         private void DgvOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

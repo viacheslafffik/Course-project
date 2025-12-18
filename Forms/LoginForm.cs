@@ -1,8 +1,8 @@
 ﻿using System;
-using Course_Project.Utils;
-using Course_Project.Database;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Course_Project.Database;
+using Course_Project.Utils;
 
 namespace Course_Project.Forms
 {
@@ -11,34 +11,46 @@ namespace Course_Project.Forms
         public LoginForm()
         {
             InitializeComponent();
-            MacStyle.Apply(this);
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = PasswordManager.Hash(txtPassword.Text);
+            string username = txtUsername.Text.Trim();
+            string passwordHash = PasswordManager.Hash(txtPassword.Text);
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(passwordHash))
+            {
+                MessageBox.Show("Введіть логін і пароль");
+                return;
+            }
 
             using (var connection = Db.Connection())
             {
                 connection.Open();
-                var query = new MySqlCommand(
-                    $"SELECT * FROM Users WHERE username='{username}' AND passwordHash='{password}'",
-                    connection
-                );
 
-                var reader = query.ExecuteReader();
-                if (!reader.Read())
+                var sql =
+                    "SELECT userId, username, role, firstName " +
+                    "FROM Users " +
+                    $"WHERE username='{username}' AND passwordHash='{passwordHash}'";
+
+                using (var cmd = new MySqlCommand(sql, connection))
+                using (var r = cmd.ExecuteReader())
                 {
-                    MessageBox.Show("Невірний логін або пароль");
-                    return;
-                }
-                string role = reader["role"].ToString();
-                string firstName = reader["firstName"].ToString();
+                    if (!r.Read())
+                    {
+                        MessageBox.Show("Невірний логін або пароль");
+                        return;
+                    }
 
-                Hide();
-                new MainForm(username, role, firstName).Show();
+                    Session.UserId = r.GetInt32("userId");
+                    Session.Username = r.GetString("username");
+                    Session.Role = r.GetString("role");
+                    Session.FirstName = r.GetString("firstName");
+                }
             }
+
+            Hide();
+            new MainForm().Show();
         }
     }
 }
