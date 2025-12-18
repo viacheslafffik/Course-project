@@ -30,7 +30,6 @@ Course-project/
 |- Pages/       
 |- Utils/   
 |- Properties/  
-|
 |- Program.cs  
 |- Course-Project.csproj
 |- Course-Project.sln
