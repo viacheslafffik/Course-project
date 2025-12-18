@@ -1,6 +1,7 @@
 using Course_Project.Pages;
 using System;
 using System.Windows.Forms;
+using Course_Project.Pages.Products;
 
 namespace Course_Project.Forms
 {
@@ -22,7 +23,7 @@ namespace Course_Project.Forms
         {
             lblHello.Text = $"Привіт, {_firstName}!";
             if (_role != "admin") btnUsers.Hide();
-            LoadPage(new ProductsPage(_role));
+            LoadPage(new ProductsPage3());
         }
 
         private void LoadPage(UserControl page)
@@ -39,7 +40,7 @@ namespace Course_Project.Forms
 
         private void BtnProducts_Click(object sender, EventArgs e)
         {
-            LoadPage(new ProductsPage(_role));
+            LoadPage(new ProductsPage3());
         }
 
         private void BtnSales_Click(object sender, EventArgs e)
@@ -49,8 +50,7 @@ namespace Course_Project.Forms
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            Hide();
-            new LoginForm().Show();
+            Hide(); new LoginForm().Show();
         }
 
         private void BtnClients_Click(object sender, EventArgs e)

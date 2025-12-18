@@ -95,11 +95,10 @@ namespace Course_Project.Models.Users
 
             return list;
         }
+         
         public static ClientCreateResult GetOrCreateWithInfo( string firstName, string lastName, string phone)
         {
-            if (string.IsNullOrWhiteSpace(phone))
-                throw new ArgumentException("Телефон не може бути порожнім");
-
+            if (string.IsNullOrWhiteSpace(phone)) throw new ArgumentException("Телефон не може бути порожнім");
             var existing = GetByPhone(phone);
             if (existing != null)
             {
@@ -109,7 +108,6 @@ namespace Course_Project.Models.Users
                     alreadyExists = true
                 };
             }
-
             using (var conn = Db.Connection())
             {
                 conn.Open();

@@ -1,4 +1,4 @@
-using Course_Project.Models.Core;
+using Course_Project.Models.Products;
 using System;
 using System.Windows.Forms;
 
@@ -6,21 +6,21 @@ namespace Course_Project.Forms.Additional
 {
     public partial class AddToOrderForm : Form
     {
-        private Product.ProductWithNames product;
+        private ProductListItem product;
 
         public int SelectedQuantity { get; private set; } = 1;
 
-        public AddToOrderForm(Product.ProductWithNames p)
+        public AddToOrderForm(ProductListItem p)
         {
             InitializeComponent();
             product = p;
 
-            lblName.Text = p.name;
-            lblPrice.Text = p.price.ToString("0.00") + " грн";
-            lblAvailable.Text = "Доступно: " + p.quantity;
+            lblName.Text = p.Name;
+            lblPrice.Text = p.Price.ToString("0.00") + " грн";
+            lblAvailable.Text = "Доступно: " + p.Quantity;
 
             numQuantity.Minimum = 1;
-            numQuantity.Maximum = p.quantity > 0 ? p.quantity : 1;
+            numQuantity.Maximum = p.Quantity > 0 ? p.Quantity : 1;
             numQuantity.Value = 1;
         }
 

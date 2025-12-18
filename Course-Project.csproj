@@ -169,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\Db.cs" />
+    <Compile Include="Data\Products\CategoryRepository.cs" />
+    <Compile Include="Data\Products\FiltersRepository.cs" />
+    <Compile Include="Data\Products\ProductsRepository.cs" />
     <Compile Include="Forms\Additional\AddBrandForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,12 +214,6 @@
     <Compile Include="Forms\Additional\PasswordPromptForm.Designer.cs">
       <DependentUpon>PasswordPromptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Additional\ProductCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Additional\ProductCard.Designer.cs">
-      <DependentUpon>ProductCard.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Additional\AddToOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,18 +232,17 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProductsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProductsForm.Designer.cs">
-      <DependentUpon>ProductsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Books\Author.cs" />
     <Compile Include="Models\Books\Book.cs" />
     <Compile Include="Models\Books\BookFilter.cs" />
     <Compile Include="Models\Books\Language.cs" />
     <Compile Include="Models\Books\Publisher.cs" />
     <Compile Include="Models\Books\Series.cs" />
+    <Compile Include="Models\Products\CategoryModel.cs" />
+    <Compile Include="Models\Products\FilterDefinition.cs" />
+    <Compile Include="Models\Products\FilterSelection.cs" />
+    <Compile Include="Models\Products\FilterType.cs" />
+    <Compile Include="Models\Products\ProductListItem.cs" />
     <Compile Include="Models\Users\Client.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderInfo.cs" />
@@ -262,11 +258,23 @@
     <Compile Include="Pages\OrdersHistoryPage.Designer.cs">
       <DependentUpon>OrdersHistoryPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProductsPage.cs">
+    <Compile Include="Pages\Products\FiltersPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\ProductsPage.Designer.cs">
-      <DependentUpon>ProductsPage.cs</DependentUpon>
+    <Compile Include="Pages\Products\FiltersPanel.Designer.cs">
+      <DependentUpon>FiltersPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Products\ProductCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Products\ProductCard.Designer.cs">
+      <DependentUpon>ProductCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Products\ProductsPage3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Products\ProductsPage3.Designer.cs">
+      <DependentUpon>ProductsPage3.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\UsersPage.cs">
       <SubType>UserControl</SubType>
@@ -319,9 +327,6 @@
     <EmbeddedResource Include="Forms\Additional\PasswordPromptForm.resx">
       <DependentUpon>PasswordPromptForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Additional\ProductCard.resx">
-      <DependentUpon>ProductCard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Additional\AddToOrderForm.resx">
       <DependentUpon>AddToOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -331,17 +336,20 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProductsForm.resx">
-      <DependentUpon>ProductsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ClientsPage.resx">
       <DependentUpon>ClientsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\OrdersHistoryPage.resx">
       <DependentUpon>OrdersHistoryPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\ProductsPage.resx">
-      <DependentUpon>ProductsPage.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\Products\FiltersPanel.resx">
+      <DependentUpon>FiltersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Products\ProductCard.resx">
+      <DependentUpon>ProductCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Products\ProductsPage3.resx">
+      <DependentUpon>ProductsPage3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\UsersPage.resx">
       <DependentUpon>UsersPage.cs</DependentUpon>
