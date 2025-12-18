@@ -25,19 +25,21 @@ Course Project — це настільний застосунок для авт�
 СТРУКТУРА ПРОЄКТУ
 -------------------------------------------------------------
 Course-project/
-├─ Data/
-├─ Database/
-├─ Models/
-├─ Forms/
-├─ Pages/
-├─ Utils/  
-├─ Properties/  
-│
-├─ Program.cs
-├─ Course-Project.csproj
-├─ Course-Project.sln
-├─ packages.config
-└─ .gitignore
+- Data/
+- Database/
+- Models/
+- Forms/
+- Pages/
+- Utils/
+- Properties/
+
+Основні файли:
+- Program.cs
+- Course-Project.csproj
+- Course-Project.sln
+- packages.config
+- .gitignore
+
 
 
 АРХІТЕКТУРА
