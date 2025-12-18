@@ -167,9 +167,9 @@ namespace Course_Project.Forms
             this.lblApp.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblApp.Location = new System.Drawing.Point(18, 20);
             this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(188, 21);
+            this.lblApp.Size = new System.Drawing.Size(177, 21);
             this.lblApp.TabIndex = 0;
-            this.lblApp.Text = "BookSales Manager • 1.3";
+            this.lblApp.Text = "Readium Manager • 1.3";
             // 
             // panelContent
             // 

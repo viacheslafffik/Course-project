@@ -89,9 +89,9 @@
             this.lblApp.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblApp.Location = new System.Drawing.Point(289, 53);
             this.lblApp.Name = "lblApp";
-            this.lblApp.Size = new System.Drawing.Size(188, 21);
+            this.lblApp.Size = new System.Drawing.Size(177, 21);
             this.lblApp.TabIndex = 5;
-            this.lblApp.Text = "BookSales Manager • 1.2";
+            this.lblApp.Text = "Readium Manager • 1.3";
             // 
             // LoginForm
             // 
