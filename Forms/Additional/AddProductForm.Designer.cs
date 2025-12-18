@@ -41,6 +41,8 @@
             this.cbBrand = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblAttr = new System.Windows.Forms.Label();
+            this.BtnAddCategory = new System.Windows.Forms.Button();
+            this.BtnAddBrand = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbName
@@ -152,6 +154,26 @@
             this.lblAttr.TabIndex = 12;
             this.lblAttr.Text = "Характеристики";
             // 
+            // BtnAddCategory
+            // 
+            this.BtnAddCategory.Location = new System.Drawing.Point(213, 366);
+            this.BtnAddCategory.Name = "BtnAddCategory";
+            this.BtnAddCategory.Size = new System.Drawing.Size(176, 23);
+            this.BtnAddCategory.TabIndex = 4;
+            this.BtnAddCategory.Text = "Додати категорію";
+            this.BtnAddCategory.UseVisualStyleBackColor = true;
+            this.BtnAddCategory.Click += new System.EventHandler(this.BtnAddCategory_Click);
+            // 
+            // BtnAddBrand
+            // 
+            this.BtnAddBrand.Location = new System.Drawing.Point(213, 405);
+            this.BtnAddBrand.Name = "BtnAddBrand";
+            this.BtnAddBrand.Size = new System.Drawing.Size(176, 23);
+            this.BtnAddBrand.TabIndex = 4;
+            this.BtnAddBrand.Text = "Додати бренд";
+            this.BtnAddBrand.UseVisualStyleBackColor = true;
+            this.BtnAddBrand.Click += new System.EventHandler(this.BtnAddBrand_Click);
+            // 
             // AddProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +187,8 @@
             this.Controls.Add(this.lblQty);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblName);
+            this.Controls.Add(this.BtnAddBrand);
+            this.Controls.Add(this.BtnAddCategory);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.cbCategory);
             this.Controls.Add(this.tbQty);
@@ -192,5 +216,7 @@
         private System.Windows.Forms.ComboBox cbBrand;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblAttr;
+        private System.Windows.Forms.Button BtnAddCategory;
+        private System.Windows.Forms.Button BtnAddBrand;
     }
 }

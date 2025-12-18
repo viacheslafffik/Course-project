@@ -2,6 +2,7 @@ using Course_Project.Pages;
 using System;
 using System.Windows.Forms;
 using Course_Project.Pages.Products;
+using Course_Project.Pages.Supplies;
 
 namespace Course_Project.Forms
 {
@@ -61,6 +62,11 @@ namespace Course_Project.Forms
         private void BtnOrders_Click(object sender, EventArgs e)
         {
             LoadPage(new OrdersHistoryPage(_username, _role));
+        }
+
+        private void BtnSupply_Click(object sender, EventArgs e)
+        {
+            LoadPage(new SuppliesPage());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Course_Project.Models.Core;
 using Course_Project.Models;
+using Course_Project.Forms.Additional;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,11 +10,17 @@ namespace Course_Project.Forms.Additional
     public partial class AddProductForm : Form
     {
         private readonly string currentUserRole;
+        public int CreatedProductId { get; private set; }
 
         public AddProductForm(string role = "seller")
         {
             InitializeComponent();
             currentUserRole = role;
+            if (currentUserRole == "seller")
+            {
+                BtnAddBrand.Hide();
+                BtnAddCategory.Hide();
+            }
             LoadData();
             cbCategory.SelectedIndexChanged += CbCategory_SelectedIndexChanged;
             if (!string.Equals(currentUserRole, "admin", StringComparison.OrdinalIgnoreCase)) 
@@ -120,35 +127,58 @@ namespace Course_Project.Forms.Additional
             int brandId = cbBrand.SelectedValue == null 
                 ? 0 
                 : Convert.ToInt32(cbBrand.SelectedValue);
-            int newProductId = Product.Create(tbName.Text.Trim(), price, qty, categoryId, brandId);
+            CreatedProductId = Product.Create(
+                tbName.Text.Trim(),
+                price,
+                qty,
+                categoryId,
+                brandId
+            );
+
             foreach (Control c in pnlAttributes.Controls)
             {
-                if (c is TextBox tb)
+                if (!(c is TextBox tb)) continue;
+
+                // 1. Атрибут із шаблону категорії
+                if (tb.Tag is int attrId)
                 {
-                    string attrName = null;
-                    string attrValue = tb.Text?.Trim();
-                    if (tb.Tag is int attrId)
-                    {
-                        ProductAttributeValue.Add(newProductId, attrId, attrValue ?? "");
-                        continue;
-                    }
-                    if (tb.Name.StartsWith("manual_name_"))
-                    {
-                        attrName = tb.Text.Trim();
-                        if (string.IsNullOrEmpty(attrName)) continue;
-                        var valueControl = pnlAttributes.Controls
-                            .OfType<TextBox>()
-                            .Where(t => t.Name.StartsWith("manual_value_"))
-                            .FirstOrDefault(t => Math.Abs(t.Top - tb.Top) < 6);
-                        var manualValue = valueControl?.Text?.Trim() ?? "";
-                        int newAttrId = CategoryAttribute.AddAndGetId(categoryId, attrName);
-                        ProductAttributeValue.Add(newProductId, newAttrId, manualValue);
-                    }
+                    string attrValue = tb.Text?.Trim() ?? "";
+                    ProductAttributeValue.Add(CreatedProductId, attrId, attrValue);
+                    continue;
+                }
+
+                // 2. Ручний атрибут
+                if (tb.Name.StartsWith("manual_name_"))
+                {
+                    string attrName = tb.Text.Trim();
+                    if (string.IsNullOrEmpty(attrName)) continue;
+
+                    var valueControl = pnlAttributes.Controls
+                        .OfType<TextBox>()
+                        .FirstOrDefault(t =>
+                            t.Name.StartsWith("manual_value_") &&
+                            Math.Abs(t.Top - tb.Top) < 6);
+
+                    string manualValue = valueControl?.Text?.Trim() ?? "";
+
+                    int newAttrId = CategoryAttribute.AddAndGetId(categoryId, attrName);
+                    ProductAttributeValue.Add(CreatedProductId, newAttrId, manualValue);
                 }
             }
+
             MessageBox.Show("Товар додано!");
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void BtnAddCategory_Click(object sender, EventArgs e)
+        {
+            new AddCategoryForm().Show();
+        }
+
+        private void BtnAddBrand_Click(object sender, EventArgs e)
+        {
+            new AddBrandForm().Show();
         }
     }
 

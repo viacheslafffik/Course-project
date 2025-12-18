@@ -28,6 +28,7 @@ namespace Course_Project.Forms
             this.lblHello = new System.Windows.Forms.Label();
             this.lblApp = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
+            this.BtnSupply = new System.Windows.Forms.Button();
             this.panelSidebar.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
@@ -35,6 +36,7 @@ namespace Course_Project.Forms
             // panelSidebar
             // 
             this.panelSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(26)))));
+            this.panelSidebar.Controls.Add(this.BtnSupply);
             this.panelSidebar.Controls.Add(this.BtnOrders);
             this.panelSidebar.Controls.Add(this.BtnClients);
             this.panelSidebar.Controls.Add(this.btnLogout);
@@ -181,6 +183,21 @@ namespace Course_Project.Forms
             this.panelContent.Size = new System.Drawing.Size(990, 536);
             this.panelContent.TabIndex = 2;
             // 
+            // BtnSupply
+            // 
+            this.BtnSupply.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnSupply.FlatAppearance.BorderSize = 0;
+            this.BtnSupply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSupply.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.BtnSupply.ForeColor = System.Drawing.Color.White;
+            this.BtnSupply.Location = new System.Drawing.Point(14, 275);
+            this.BtnSupply.Name = "BtnSupply";
+            this.BtnSupply.Size = new System.Drawing.Size(182, 43);
+            this.BtnSupply.TabIndex = 7;
+            this.BtnSupply.Text = "Поставки";
+            this.BtnSupply.UseVisualStyleBackColor = true;
+            this.BtnSupply.Click += new System.EventHandler(this.BtnSupply_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -214,5 +231,6 @@ namespace Course_Project.Forms
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button BtnClients;
         private System.Windows.Forms.Button BtnOrders;
+        private System.Windows.Forms.Button BtnSupply;
     }
 }

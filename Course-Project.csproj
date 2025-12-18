@@ -172,6 +172,8 @@
     <Compile Include="Data\Products\CategoryRepository.cs" />
     <Compile Include="Data\Products\FiltersRepository.cs" />
     <Compile Include="Data\Products\ProductsRepository.cs" />
+    <Compile Include="Data\Supplies\SupplierRepository.cs" />
+    <Compile Include="Data\Supplies\SuppliesRepository.cs" />
     <Compile Include="Forms\Additional\AddBrandForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,17 +234,20 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Books\Author.cs" />
-    <Compile Include="Models\Books\Book.cs" />
-    <Compile Include="Models\Books\BookFilter.cs" />
-    <Compile Include="Models\Books\Language.cs" />
-    <Compile Include="Models\Books\Publisher.cs" />
-    <Compile Include="Models\Books\Series.cs" />
+    <Compile Include="Forms\Supplies\SupplyBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Supplies\SupplyBookForm.Designer.cs">
+      <DependentUpon>SupplyBookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Products\CategoryModel.cs" />
     <Compile Include="Models\Products\FilterDefinition.cs" />
     <Compile Include="Models\Products\FilterSelection.cs" />
     <Compile Include="Models\Products\FilterType.cs" />
     <Compile Include="Models\Products\ProductListItem.cs" />
+    <Compile Include="Models\Supplies\SupplierModel.cs" />
+    <Compile Include="Models\Supplies\SupplyItemModel.cs" />
+    <Compile Include="Models\Supplies\SupplyModel.cs" />
     <Compile Include="Models\Users\Client.cs" />
     <Compile Include="Models\Orders\Order.cs" />
     <Compile Include="Models\Orders\OrderInfo.cs" />
@@ -275,6 +280,12 @@
     </Compile>
     <Compile Include="Pages\Products\ProductsPage3.Designer.cs">
       <DependentUpon>ProductsPage3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Supplies\SuppliesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Supplies\SuppliesPage.Designer.cs">
+      <DependentUpon>SuppliesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\UsersPage.cs">
       <SubType>UserControl</SubType>
@@ -336,6 +347,9 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Supplies\SupplyBookForm.resx">
+      <DependentUpon>SupplyBookForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pages\ClientsPage.resx">
       <DependentUpon>ClientsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -350,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Products\ProductsPage3.resx">
       <DependentUpon>ProductsPage3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Supplies\SuppliesPage.resx">
+      <DependentUpon>SuppliesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\UsersPage.resx">
       <DependentUpon>UsersPage.cs</DependentUpon>
