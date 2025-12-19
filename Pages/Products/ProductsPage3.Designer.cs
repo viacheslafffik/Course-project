@@ -6,12 +6,10 @@
 
         private System.Windows.Forms.TableLayoutPanel root;
         private System.Windows.Forms.Panel pnlHeader;
-
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ComboBox cbSort;
         private System.Windows.Forms.Button btnLoad;
-
         private System.Windows.Forms.TableLayoutPanel content;
         private FiltersPanel filtersPanel;
         private System.Windows.Forms.FlowLayoutPanel flpProducts;
@@ -41,8 +39,7 @@
             // 
             // root
             // 
-            this.root.ColumnCount = 1;
-            this.root.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.root.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.root.Controls.Add(this.pnlHeader, 0, 0);
             this.root.Controls.Add(this.content, 0, 1);
             this.root.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -51,7 +48,7 @@
             this.root.RowCount = 2;
             this.root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.root.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.root.Size = new System.Drawing.Size(150, 150);
+            this.root.Size = new System.Drawing.Size(1200, 800);
             this.root.TabIndex = 0;
             // 
             // pnlHeader
@@ -64,7 +61,7 @@
             this.pnlHeader.Location = new System.Drawing.Point(3, 3);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(12);
-            this.pnlHeader.Size = new System.Drawing.Size(144, 58);
+            this.pnlHeader.Size = new System.Drawing.Size(1194, 58);
             this.pnlHeader.TabIndex = 0;
             // 
             // cbCategory
@@ -92,9 +89,9 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(768, 19);
+            this.btnLoad.Location = new System.Drawing.Point(768, 18);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(110, 23);
+            this.btnLoad.Size = new System.Drawing.Size(110, 24);
             this.btnLoad.TabIndex = 3;
             this.btnLoad.Text = "Оновити";
             // 
@@ -108,8 +105,9 @@
             this.content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.content.Location = new System.Drawing.Point(3, 67);
             this.content.Name = "content";
-            this.content.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.content.Size = new System.Drawing.Size(144, 80);
+            this.content.RowCount = 1;
+            this.content.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.content.Size = new System.Drawing.Size(1194, 730);
             this.content.TabIndex = 1;
             // 
             // filtersPanel
@@ -119,24 +117,24 @@
             this.filtersPanel.MaximumSize = new System.Drawing.Size(380, 0);
             this.filtersPanel.MinimumSize = new System.Drawing.Size(320, 0);
             this.filtersPanel.Name = "filtersPanel";
-            this.filtersPanel.Size = new System.Drawing.Size(334, 74);
+            this.filtersPanel.Size = new System.Drawing.Size(334, 724);
             this.filtersPanel.TabIndex = 0;
             // 
             // flpProducts
             // 
             this.flpProducts.AutoScroll = true;
             this.flpProducts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpProducts.Location = new System.Drawing.Point(340, 0);
-            this.flpProducts.Margin = new System.Windows.Forms.Padding(0);
+            this.flpProducts.Location = new System.Drawing.Point(343, 3);
             this.flpProducts.Name = "flpProducts";
             this.flpProducts.Padding = new System.Windows.Forms.Padding(20);
-            this.flpProducts.Size = new System.Drawing.Size(1, 80);
+            this.flpProducts.Size = new System.Drawing.Size(848, 724);
             this.flpProducts.TabIndex = 1;
             // 
             // ProductsPage3
             // 
             this.Controls.Add(this.root);
             this.Name = "ProductsPage3";
+            this.Size = new System.Drawing.Size(1200, 800);
             this.root.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
