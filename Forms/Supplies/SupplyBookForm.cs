@@ -3,7 +3,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Windows.Forms;
 
 namespace Course_Project.Forms.Supplies
@@ -27,7 +26,6 @@ namespace Course_Project.Forms.Supplies
             using (var conn = Db.Connection())
             {
                 conn.Open();
-
                 FillCombo(conn, cbLanguage, "SELECT languageId, name FROM Language ORDER BY name", "languageId", "name");
                 FillCombo(conn, cbPublisher, "SELECT publisherId, name FROM Publisher ORDER BY name", "publisherId", "name");
                 FillCombo(conn, cbSeries, "SELECT seriesId, name FROM Series ORDER BY name", "seriesId", "name");
@@ -42,9 +40,24 @@ namespace Course_Project.Forms.Supplies
                 var items = new List<ComboItem>();
                 while (r.Read())
                     items.Add(new ComboItem(r.GetInt32(idField), r.GetString(textField)));
+
                 cb.DisplayMember = "Text";
                 cb.ValueMember = "Id";
                 cb.DataSource = items;
+            }
+        }
+
+        private int GetBookCategoryId(MySqlConnection conn, MySqlTransaction tr)
+        {
+            using (var cmd = new MySqlCommand(
+                "SELECT categoryId FROM Category WHERE productType='book' LIMIT 1",
+                conn, tr))
+            {
+                var id = cmd.ExecuteScalar();
+                if (id == null || id == DBNull.Value)
+                    throw new Exception("Не знайдена книжкова категорія (productType='book').");
+
+                return Convert.ToInt32(id);
             }
         }
 
@@ -90,13 +103,19 @@ namespace Course_Project.Forms.Supplies
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tbName.Text) || string.IsNullOrWhiteSpace(tbSalePrice.Text) || string.IsNullOrWhiteSpace(tbQty.Text))
+            if (string.IsNullOrWhiteSpace(tbName.Text) ||
+                string.IsNullOrWhiteSpace(tbSalePrice.Text) ||
+                string.IsNullOrWhiteSpace(tbQty.Text))
             {
                 MessageBox.Show("Заповни назву, ціну продажу і кількість.");
                 return;
             }
 
-            if (!decimal.TryParse(tbSalePrice.Text.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var salePrice))
+            if (!decimal.TryParse(
+                tbSalePrice.Text.Replace(',', '.'),
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out var salePrice))
             {
                 MessageBox.Show("Ціна продажу некоректна.");
                 return;
@@ -108,10 +127,6 @@ namespace Course_Project.Forms.Supplies
                 return;
             }
 
-            var publisherName = tbPublisherNew.Text.Trim();
-            var seriesName = tbSeriesNew.Text.Trim();
-            var langName = tbLanguageNew.Text.Trim();
-
             int publisherId = cbPublisher.SelectedValue is int ? (int)cbPublisher.SelectedValue : 0;
             int seriesId = cbSeries.SelectedValue is int ? (int)cbSeries.SelectedValue : 0;
             int languageId = cbLanguage.SelectedValue is int ? (int)cbLanguage.SelectedValue : 0;
@@ -121,35 +136,38 @@ namespace Course_Project.Forms.Supplies
                 conn.Open();
                 using (var tr = conn.BeginTransaction())
                 {
-                    if (!string.IsNullOrWhiteSpace(publisherName)) publisherId = GetOrCreateSimple(conn, tr, "Publisher", "name", publisherName);
-                    if (!string.IsNullOrWhiteSpace(seriesName)) seriesId = GetOrCreateSimple(conn, tr, "Series", "name", seriesName);
-                    if (!string.IsNullOrWhiteSpace(langName)) languageId = GetOrCreateSimple(conn, tr, "Language", "name", langName);
+                    if (!string.IsNullOrWhiteSpace(tbPublisherNew.Text))
+                        publisherId = GetOrCreateSimple(conn, tr, "Publisher", "name", tbPublisherNew.Text);
 
-                    int categoryId = 0;
-                    if (!int.TryParse(tbCategoryId.Text, out categoryId) || categoryId <= 0)
-                    {
-                        MessageBox.Show("Вкажи categoryId (книжкова категорія).");
-                        tr.Rollback();
-                        return;
-                    }
+                    if (!string.IsNullOrWhiteSpace(tbSeriesNew.Text))
+                        seriesId = GetOrCreateSimple(conn, tr, "Series", "name", tbSeriesNew.Text);
 
+                    if (!string.IsNullOrWhiteSpace(tbLanguageNew.Text))
+                        languageId = GetOrCreateSimple(conn, tr, "Language", "name", tbLanguageNew.Text);
+
+                    int categoryId = GetBookCategoryId(conn, tr);
+
+                    int productId;
                     var insProd =
                         @"INSERT INTO Product (name, price, quantity, categoryId, brandId)
-                          VALUES (@n, @p, @q, @cid, NULL);
+                          VALUES (@n, @p, 0, @cid, NULL);
                           SELECT LAST_INSERT_ID();";
-                    int productId = 0;
+
                     using (var p = new MySqlCommand(insProd, conn, tr))
                     {
                         p.Parameters.AddWithValue("@n", tbName.Text.Trim());
                         p.Parameters.AddWithValue("@p", salePrice);
-                        p.Parameters.AddWithValue("@q", 0);
                         p.Parameters.AddWithValue("@cid", categoryId);
                         productId = Convert.ToInt32(p.ExecuteScalar());
                     }
 
                     var insBook =
-                        @"INSERT INTO Book (productId, isbn, publisherId, seriesId, languageId, ageMin, hasIllustrations, shortDescription, pages, publishYear)
-                          VALUES (@pid, @isbn, @pub, @ser, @lang, @age, @ill, @desc, @pages, @year)";
+                        @"INSERT INTO Book
+                          (productId, isbn, publisherId, seriesId, languageId, ageMin,
+                           hasIllustrations, shortDescription, pages, publishYear)
+                          VALUES
+                          (@pid, @isbn, @pub, @ser, @lang, @age, @ill, @desc, @pages, @year)";
+
                     using (var b = new MySqlCommand(insBook, conn, tr))
                     {
                         b.Parameters.AddWithValue("@pid", productId);
@@ -157,27 +175,30 @@ namespace Course_Project.Forms.Supplies
                         b.Parameters.AddWithValue("@pub", publisherId == 0 ? (object)DBNull.Value : publisherId);
                         b.Parameters.AddWithValue("@ser", seriesId == 0 ? (object)DBNull.Value : seriesId);
                         b.Parameters.AddWithValue("@lang", languageId == 0 ? (object)DBNull.Value : languageId);
-                        b.Parameters.AddWithValue("@age", string.IsNullOrWhiteSpace(tbAgeMin.Text) ? (object)DBNull.Value : Convert.ToInt32(tbAgeMin.Text));
+                        b.Parameters.AddWithValue("@age", int.TryParse(tbAgeMin.Text, out var a) ? a : (object)DBNull.Value);
                         b.Parameters.AddWithValue("@ill", cbIllustrations.Checked ? 1 : 0);
                         b.Parameters.AddWithValue("@desc", string.IsNullOrWhiteSpace(tbDesc.Text) ? (object)DBNull.Value : tbDesc.Text.Trim());
-                        b.Parameters.AddWithValue("@pages", string.IsNullOrWhiteSpace(tbPages.Text) ? (object)DBNull.Value : Convert.ToInt32(tbPages.Text));
-                        b.Parameters.AddWithValue("@year", string.IsNullOrWhiteSpace(tbYear.Text) ? (object)DBNull.Value : Convert.ToInt32(tbYear.Text));
+                        b.Parameters.AddWithValue("@pages", int.TryParse(tbPages.Text, out var pgs) ? pgs : (object)DBNull.Value);
+                        b.Parameters.AddWithValue("@year", int.TryParse(tbYear.Text, out var y) ? y : (object)DBNull.Value);
                         b.ExecuteNonQuery();
                     }
 
-                    var authors = tbAuthors.Text.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(x => x.Trim()).Where(x => x.Length > 0).Distinct().ToList();
+                    var authors = tbAuthors.Text
+                        .Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.Trim())
+                        .Distinct();
 
                     foreach (var a in authors)
                     {
-                        var authorId = GetOrCreateAuthor(conn, tr, a);
+                        int authorId = GetOrCreateAuthor(conn, tr, a);
                         if (authorId == 0) continue;
 
-                        var link = @"INSERT IGNORE INTO BookAuthor (productId, authorId) VALUES (@pid, @aid)";
-                        using (var l = new MySqlCommand(link, conn, tr))
+                        using (var l = new MySqlCommand(
+                            "INSERT IGNORE INTO BookAuthor (productId, authorId) VALUES (@p, @a)",
+                            conn, tr))
                         {
-                            l.Parameters.AddWithValue("@pid", productId);
-                            l.Parameters.AddWithValue("@aid", authorId);
+                            l.Parameters.AddWithValue("@p", productId);
+                            l.Parameters.AddWithValue("@a", authorId);
                             l.ExecuteNonQuery();
                         }
                     }

@@ -241,6 +241,12 @@
     <Compile Include="Forms\Supplies\SupplyBookForm.Designer.cs">
       <DependentUpon>SupplyBookForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Supplies\SupplyItemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Supplies\SupplyItemsForm.Designer.cs">
+      <DependentUpon>SupplyItemsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Products\CategoryModel.cs" />
     <Compile Include="Models\Products\FilterDefinition.cs" />
     <Compile Include="Models\Products\FilterSelection.cs" />
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Supplies\SupplyBookForm.resx">
       <DependentUpon>SupplyBookForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Supplies\SupplyItemsForm.resx">
+      <DependentUpon>SupplyItemsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\BestsellerPage.resx">
       <DependentUpon>BestsellerPage.cs</DependentUpon>
